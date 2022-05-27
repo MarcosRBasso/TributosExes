@@ -1,0 +1,28 @@
+2022-05-24 15:21:03,207:INFO:Iniciando a leitura dos dados do serviço paises.
+2022-05-24 15:21:03,237:DEBUG:Starting new HTTPS connection (1): tributos.betha.cloud:443
+2022-05-24 15:21:03,452:DEBUG:https://tributos.betha.cloud:443 "GET /service-layer-tributos/api/paises?offset=0&limit=1 HTTP/1.1" 405 80
+2022-05-24 15:38:02,410:INFO:Iniciando a leitura dos dados do serviço paises.
+2022-05-24 15:38:02,415:DEBUG:Starting new HTTPS connection (1): tributos.betha.cloud:443
+2022-05-24 15:38:02,580:DEBUG:https://tributos.betha.cloud:443 "GET /service-layer-tributos/api/paises?offset=0&limit=1 HTTP/1.1" 405 80
+2022-05-24 16:22:53,224:INFO:Iniciando o processamento dos dados da tabela logradourosBairros.
+2022-05-25 14:11:27,396:INFO:Iniciando o processamento dos dados da tabela logradourosBairros.
+2022-05-25 14:59:41,637:INFO:Iniciando a leitura dos dados do serviço logradourosBairros.
+2022-05-25 14:59:41,662:DEBUG:Starting new HTTPS connection (1): tributos.betha.cloud:443
+2022-05-25 14:59:41,868:DEBUG:https://tributos.betha.cloud:443 "GET /service-layer-tributos/api/logradourosBairros?offset=0&limit=1 HTTP/1.1" 405 80
+2022-05-25 14:59:46,052:INFO:Iniciando a leitura dos dados do serviço logradourosBairros.
+2022-05-25 14:59:46,058:DEBUG:Starting new HTTPS connection (1): tributos.betha.cloud:443
+2022-05-25 14:59:46,192:DEBUG:https://tributos.betha.cloud:443 "GET /service-layer-tributos/api/logradourosBairros?offset=0&limit=1 HTTP/1.1" 405 80
+2022-05-25 15:01:22,606:INFO:Iniciando a leitura dos dados do serviço estados.
+2022-05-25 15:01:22,613:DEBUG:Starting new HTTPS connection (1): tributos.betha.cloud:443
+2022-05-25 15:01:22,848:DEBUG:https://tributos.betha.cloud:443 "GET /service-layer-tributos/api/estados?offset=0&limit=1 HTTP/1.1" 405 80
+2022-05-25 15:12:39,307:INFO:Iniciando o processamento dos dados da tabela unidades-medida.
+2022-05-25 15:13:01,087:INFO:Iniciando o processamento dos dados da tabela unidades-medida.
+2022-05-26 08:43:02,245:INFO:Iniciando a leitura dos dados do serviço paises.
+2022-05-26 08:43:02,278:DEBUG:Starting new HTTPS connection (1): tributos.betha.cloud:443
+2022-05-26 08:43:02,504:DEBUG:https://tributos.betha.cloud:443 "GET /service-layer-tributos/api/paises?offset=0&limit=1 HTTP/1.1" 405 80
+2022-05-26 09:02:13,573:INFO:Iniciando a leitura dos dados do serviço estados.
+2022-05-26 09:02:13,579:DEBUG:Starting new HTTPS connection (1): tributos.betha.cloud:443
+2022-05-26 09:02:13,757:DEBUG:https://tributos.betha.cloud:443 "GET /service-layer-tributos/api/estados?offset=0&limit=1 HTTP/1.1" 405 80
+2022-05-26 09:19:18,248:INFO:Iniciando a leitura dos dados do serviço paises.
+2022-05-26 09:19:18,254:DEBUG:Starting new HTTPS connection (1): tributos.betha.cloud:443
+2022-05-26 09:19:18,417:DEBUG:https://tributos.betha.cloud:443 "GET /service-layer-tributos/api/paises?offset=0&limit=1 HTTP/1.1" 405 80
