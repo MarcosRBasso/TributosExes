@@ -1,0 +1,1626 @@
+def enviar_dados_tipos_atividadesEconomicas():
+    send_log_info("Iniciando o processamento dos dados da tabela tipos_atividadesEconomicas.")
+    listaTiposatividadesEconomicas = tiposatividadesEconomicas.db_list()
+    if listaTiposatividadesEconomicas:
+        for res in listaTiposatividadesEconomicas:
+            id_natureza_juridica = atividadesEconomicas.get_id_cloud(res[3])
+            tiposatividadesEconomicas.send_post(res[0], id_natureza_juridica, res[4], res[5], res[6])
+    else:
+        send_log_info("Não foram encontrados registros na tabela tipos_atividadesEconomicas para enviar.")
+    send_log_info("Processamento dos dados da tabela tipos_atividadesEconomicas finalizado.")
+#
+#def enviar_dados_tipos_atividadesEconomicasInfCompOp():
+    #send_log_info("Iniciando o processamento dos dados da tabela tipos_atividadesEconomicasInfCompOp.")
+    listaatividadesEconomicasInfCompOp = tiposAlteracoesOrcamentariasReceitas.db_list()
+    if listaatividadesEconomicasInfCompOp:
+        for res in listaatividadesEconomicasInfCompOp:
+            tiposAlteracoesOrcamentariasReceitas.send_post(res[0], res[3], res[4])
+    else:
+        send_log_info("Não foram encontrados registros na tabela tipos_atividadesEconomicasInfCompOp para enviar.")
+    send_log_info("Processamento dos dados da tabela tipos_atividadesEconomicasInfCompOp finalizado.")
+
+def enviar_dados_tipos_atividadesEconomicasInfComplem():
+    send_log_info("Iniciando o processamento dos dados da tabela tipos_atividadesEconomicasInfCompOps_exercicios.")
+    listaatividadesEconomicasInfComplem = tiposAlteracoesOrcamentariasReceitasExercicios.db_list()
+    if listaatividadesEconomicasInfComplem:
+        for res in listaatividadesEconomicasInfComplem:
+            id_tipo_alteracao_orcamentaria_receita = tiposAlteracoesOrcamentariasReceitas.get_id_cloud(res[3])
+            tiposAlteracoesOrcamentariasReceitasExercicios.send_post(res[0], id_tipo_alteracao_orcamentaria_receita, res[4])
+    else:
+        send_log_info("Não foram encontrados registros na tabela tipos_atividadesEconomicasInfCompOps_exercicios para enviar.")
+    send_log_info("Processamento dos dados da tabela tipos_atividadesEconomicasInfCompOps_exercicios finalizado.")
+
+def enviar_dados_transacoes_financeiras():
+    send_log_info("Iniciando o processamento dos dados da tabela transacoes_financeiras.")
+    listaTransacoesFinanceiras = transacoesFinanceiras.db_list()
+    if listaTransacoesFinanceiras:
+        for res in listaTransacoesFinanceiras:
+            transacoesFinanceiras.send_post(res[0], res[3], res[4])
+    else:
+        send_log_info("Não foram encontrados registros na tabela transacoes_financeiras para enviar.")
+    send_log_info("Processamento dos dados da tabela transacoes_financeiras finalizado.")
+
+def enviar_dados_transacoes_financeiras_exercicios():
+    send_log_info("Iniciando o processamento dos dados da tabela transacoes_financeiras_exercicios.")
+    listaTransacoesFinanceirasExercicios = transacoesFinanceirasExercicios.db_list()
+    if listaTransacoesFinanceirasExercicios:
+        for res in listaTransacoesFinanceirasExercicios:
+            id_transacao_financeira = transacoesFinanceiras.get_id_cloud(res[3])
+            transacoesFinanceirasExercicios.send_post(res[0], id_transacao_financeira, res[4])
+    else:
+        send_log_info("Não foram encontrados registros na tabela transacoes_financeiras_exercicios para enviar.")
+    send_log_info("Processamento dos dados da tabela transacoes_financeiras_exercicios finalizado.")
+
+def enviar_dados_tipos_bloqueios():
+    send_log_info("Iniciando o processamento dos dados da tabela tipos_bloqueios.")
+    listaTiposBloqueios = tiposBloqueios.db_list()
+    if listaTiposBloqueios:
+        for res in listaTiposBloqueios:
+            tiposBloqueios.send_post(res[0], res[3])
+    else:
+        send_log_info("Não foram encontrados registros na tabela tipos_bloqueios para enviar.")
+    send_log_info("Processamento dos dados da tabela tipos_bloqueios finalizado.")
+
+def enviar_dados_tipos_bloqueios_exercicios():
+    send_log_info("Iniciando o processamento dos dados da tabela tipos_bloqueios_exercicios.")
+    listaTiposBloqueiosExercicios = tiposBloqueiosExercicios.db_list()
+    if listaTiposBloqueiosExercicios:
+        for res in listaTiposBloqueiosExercicios:
+            id_tipo_bloqueio = tiposBloqueios.get_id_cloud(res[3])
+            tiposBloqueiosExercicios.send_post(res[0], id_tipo_bloqueio, res[4])
+    else:
+        send_log_info("Não foram encontrados registros na tabela tipos_bloqueios_exercicios para enviar.")
+    send_log_info("Processamento dos dados da tabela tipos_bloqueios_exercicios finalizado.")
+
+def enviar_dados_configuracoes_organogramas():
+    send_log_info("Iniciando o processamento dos dados da tabela configuracoes_organogramas.")
+    listaConfiguracoesOrganogramas = configuracoesOrganogramas.db_list()
+    if listaConfiguracoesOrganogramas:
+        for res in listaConfiguracoesOrganogramas:
+            lista_niveis = configuracoesOrganogramas.db_list_configuracoes_organogramas_niveis(res[1])
+            configuracoesOrganogramas.send_post(res[0], res[3], lista_niveis)
+    else:
+        send_log_info("Não foram encontrados registros na tabela configuracoes_organogramas para enviar.")
+    send_log_info("Processamento dos dados da tabela configuracoes_organogramas finalizado.")
+
+def enviar_dados_organogramas():
+    send_log_info("Iniciando o processamento dos dados da tabela organogramas.")
+    listaOrganogramas = organogramas.db_list()
+    if listaOrganogramas:
+        for res in listaOrganogramas:
+            id_configuracao_organograma = configuracoesOrganogramas.get_id_cloud(res[3])
+            id_tipo_administracao = tiposatividadesEconomicas.get_id_cloud(res[4])
+            organogramas.send_post(res[0], id_configuracao_organograma, id_tipo_administracao, res[5], res[6])
+    else:
+        send_log_info("Não foram encontrados registros na tabela organogramas para enviar.")
+    send_log_info("Processamento dos dados da tabela organogramas finalizado.")
+
+def enviar_dados_acoes():
+    send_log_info("Iniciando o processamento dos dados da tabela acoes.")
+    listaAcoes = acoes.db_list()
+    if listaAcoes:
+        for res in listaAcoes:
+            id_ppa = None # TODO ver serviço de origem da informação
+            acoes.send_post(res[0], id_ppa, res[4], res[5], res[6])
+    else:
+        send_log_info("Não foram encontrados registros na tabela acoes para enviar.")
+    send_log_info("Processamento dos dados da tabela acoes finalizado.")
+
+def enviar_dados_configuracoes_funcionais():
+    send_log_info("Iniciando o processamento dos dados da tabela configuracoes_funcionais.")
+    listaConfiguracoesFuncionais = configuracoesFuncionais.db_list()
+    if listaConfiguracoesFuncionais:
+        for res in listaConfiguracoesFuncionais:
+            configuracoesFuncionais.send_post(res[0], res[3])
+    else:
+        send_log_info("Não foram encontrados registros na tabela configuracoes_funcionais para enviar.")
+    send_log_info("Processamento dos dados da tabela configuracoes_funcionais finalizado.")
+
+def enviar_dados_funcoes():
+    send_log_info("Iniciando o processamento dos dados da tabela funcoes.")
+    listaFuncoes = funcoes.db_list()
+    if listaFuncoes:
+        for res in listaFuncoes:
+            id_configuracao_funcional = configuracoesFuncionais.get_id_cloud(res[3])
+            funcoes.send_post(res[0], id_configuracao_funcional, res[4], res[5])
+    else:
+        send_log_info("Não foram encontrados registros na tabela funcoes para enviar.")
+    send_log_info("Processamento dos dados da tabela funcoes finalizado.")
+
+def enviar_dados_subfuncoes():
+    send_log_info("Iniciando o processamento dos dados da tabela subfuncoes.")
+    listaSubfuncoes = subfuncoes.db_list()
+    if listaSubfuncoes:
+        for res in listaSubfuncoes:
+            id_configuracao_funcional = configuracoesFuncionais.get_id_cloud(res[3])
+            subfuncoes.send_post(res[0], id_configuracao_funcional, res[4], res[5])
+    else:
+        send_log_info("Não foram encontrados registros na tabela subfuncoes para enviar.")
+    send_log_info("Processamento dos dados da tabela subfuncoes finalizado.")
+
+def enviar_dados_localizadores():
+    send_log_info("Iniciando o processamento dos dados da tabela localizadores.")
+    listaLocalizadores = localizadores.db_list()
+    if listaLocalizadores:
+        for res in listaLocalizadores:
+            id_ppa = None # TODO ver serviço de origem da informação
+            localizadores.send_post(res[0], id_ppa, res[4])
+    else:
+        send_log_info("Não foram encontrados registros na tabela localizadores para enviar.")
+    send_log_info("Processamento dos dados da tabela localizadores finalizado.")
+
+def enviar_dados_configuracoes_naturezas_despesas():
+    send_log_info("Iniciando o processamento dos dados da tabela configuracoes_naturezas_despesas.")
+    listaConfiguracoesNaturezasDespesas = configuracoesNaturezasDespesas.db_list()
+    if listaConfiguracoesNaturezasDespesas:
+        for res in listaConfiguracoesNaturezasDespesas:
+            lista_niveis = configuracoesNaturezasDespesas.db_list_configuracoes_naturezas_despesas_niveis(res[1])
+            configuracoesNaturezasDespesas.send_post(res[0], res[3], lista_niveis)
+    else:
+        send_log_info("Não foram encontrados registros na tabela configuracoes_naturezas_despesas para enviar.")
+    send_log_info("Processamento dos dados da tabela configuracoes_naturezas_despesas finalizado.")
+
+def enviar_dados_naturezas_despesas():
+    send_log_info("Iniciando o processamento dos dados da tabela naturezas_despesas.")
+    listaNaturezasDespesas = naturezasDespesas.db_list()
+    if listaNaturezasDespesas:
+        for res in listaNaturezasDespesas:
+            id_configuracao_natureza_despesa = configuracoesNaturezasDespesas.get_id_cloud(res[3])
+            lista_marcadores = naturezasDespesas.db_list_naturezas_despesas_marcadores(res[1])
+            naturezasDespesas.send_post(res[0], id_configuracao_natureza_despesa, res[4], res[5], res[6], lista_marcadores)
+    else:
+        send_log_info("Não foram encontrados registros na tabela configuracoes_naturezas_despesas para enviar.")
+    send_log_info("Processamento dos dados da tabela configuracoes_naturezas_despesas finalizado.")
+
+def enviar_dados_configuracoes_naturezas_despesas():
+    send_log_info("Iniciando o processamento dos dados da tabela configuracoes_naturezas_receitas.")
+    listaConfiguracoesNaturezasReceitas = configuracoesNaturezasReceitas.db_list()
+    if listaConfiguracoesNaturezasReceitas:
+        for res in listaConfiguracoesNaturezasReceitas:
+            lista_niveis = configuracoesNaturezasReceitas.db_list_configuracoes_naturezas_receitas_niveis(res[1])
+            configuracoesNaturezasReceitas.send_post(res[0], res[3], lista_niveis)
+    else:
+        send_log_info("Não foram encontrados registros na tabela configuracoes_naturezas_receitas para enviar.")
+    send_log_info("Processamento dos dados da tabela configuracoes_naturezas_receitas finalizado.")
+
+def enviar_dados_naturezas_receitas():
+    send_log_info("Iniciando o processamento dos dados da tabela naturezas_receitas.")
+    listaNaturezasReceitas = naturezasReceitas.db_list()
+    if listaNaturezasReceitas:
+        for res in listaNaturezasReceitas:
+            id_configuracao_natureza_receita = configuracoesNaturezasReceitas.get_id_cloud(res[3])
+            lista_marcadores = naturezasReceitas.db_list_naturezas_receitas_marcadores(res[1])
+            naturezasReceitas.send_post(res[0], id_configuracao_natureza_receita, res[4], res[5], res[6], lista_marcadores)
+    else:
+        send_log_info("Não foram encontrados registros na tabela naturezas_receitas para enviar.")
+    send_log_info("Processamento dos dados da tabela naturezas_receitas finalizado.")
+
+def enviar_dados_arquivos():
+    send_log_info("Iniciando o processamento dos dados da tabela arquivos.")
+    listaarquivos = arquivos.db_list()
+    if listaarquivos:
+        for res in listaarquivos:
+            id_tipo_responsavel = tiposarquivos.get_id_cloud(res[3])
+            lista_periodos_responsabilidades = arquivos.db_list_arquivos_periodos_responsabilidades(res[1])
+            lista_enderecos = arquivos.db_list_arquivos_enderecos(res[1])
+            lista_telefones = arquivos.db_list_arquivos_telefones(res[1])
+            lista_emails = arquivos.db_list_arquivos_emails(res[1])
+            arquivos.send_post(res[0], id_tipo_responsavel, res[4], res[5], res[6], res[7], res[8], res[9], res[10], lista_periodos_responsabilidades, lista_enderecos, lista_telefones, lista_emails)
+    else:
+        send_log_info("Não foram encontrados registros na tabela arquivos para enviar.")
+    send_log_info("Processamento dos dados da tabela arquivos finalizado.")
+
+def enviar_dados_programas():
+    send_log_info("Iniciando o processamento dos dados da tabela programas.")
+    listaProgramas = programas.db_list()
+    if listaProgramas:
+        for res in listaProgramas:
+            id_ppa = None # TODO ver serviço de origem da informação
+            id_macro_objetivo = None # TODO ver serviço de origem da informação
+            id_responsavel = arquivos.get(res[5])
+            programas.send_post(res[0], id_ppa, id_macro_objetivo, id_responsavel, res[6], res[7], res[8], res[9], res[10], res[11], res[12], res[13], res[14])
+    else:
+        send_log_info("Não foram encontrados registros na tabela programas para enviar.")
+    send_log_info("Processamento dos dados da tabela programas finalizado.")
+
+def enviar_dados_ordenadores_despesas():
+    send_log_info("Iniciando o processamento dos dados da tabela ordenadores_despesas.")
+    listaOrdenadoresDespesas = ordenadoresDespesas.db_list()
+    if listaOrdenadoresDespesas:
+        for res in listaOrdenadoresDespesas:
+            lista_ordenadores = ordenadoresDespesas.db_list_ordenadores_despesas_organogramas(res[1])
+            ordenadoresDespesas.send_post(res[0], res[3], res[4], lista_ordenadores)
+    else:
+        send_log_info("Não foram encontrados registros na tabela ordenadores_despesas para enviar.")
+    send_log_info("Processamento dos dados da tabela ordenadores_despesas finalizado.")
+
+def enviar_dados_receitas_nao_previstas():
+    send_log_info("Iniciando o processamento dos dados da tabela receitas_nao_previstas.")
+    listaReceitasNaoPrevistas = receitasNaoPrevistas.db_list()
+    if listaReceitasNaoPrevistas:
+        for res in listaReceitasNaoPrevistas:
+            id_natureza_receita = naturezasReceitas.get_id_cloud(res[3])
+            id_organograma = organogramas.get_id_cloud(res[4])
+            receitasNaoPrevistas.send_post(res[0], id_natureza_receita, id_organograma, res[5])
+    else:
+        send_log_info("Não foram encontrados registros na tabela receitas_nao_previstas para enviar.")
+    send_log_info("Processamento dos dados da tabela receitas_nao_previstas finalizado.")
+
+def enviar_dados_despesas_nao_previstas():
+    send_log_info("Iniciando o processamento dos dados da tabela despesas_nao_previstas.")
+    listaDespesasNaoPrevistas = despesasNaoPrevistas.db_list()
+    if listaDespesasNaoPrevistas:
+        for res in listaDespesasNaoPrevistas:
+            id_programa = programas.get_id_cloud(res[3])
+            id_acao = acoes.get_id_cloud(res[4])
+            id_localizador = localizadores.get_id_cloud(res[5])
+            id_organograma = organogramas.get_id_cloud(res[6])
+            id_funcao = funcoes.get_id_cloud(res[7])
+            id_subfuncao = subfuncoes.get_id_cloud(res[8])
+            id_natureza = naturezasDespesas.get_id_cloud(res[9])
+            despesasNaoPrevistas.send_post(res[0], id_programa, id_acao, id_localizador, id_organograma, id_funcao, id_subfuncao, id_natureza, res[10])
+    else:
+        send_log_info("Não foram encontrados registros na tabela despesas_nao_previstas para enviar.")
+    send_log_info("Processamento dos dados da tabela despesas_nao_previstas finalizado.")
+
+def enviar_dados_grupos_configuracoes_assinaturas():
+    send_log_info("Iniciando o processamento dos dados da tabela grupos_configuracoes_assinaturas.")
+    listaGruposConfiguracoesAssinaturas = gruposConfiguracoesAssinaturas.db_list()
+    if listaGruposConfiguracoesAssinaturas:
+        for res in listaGruposConfiguracoesAssinaturas:
+            gruposConfiguracoesAssinaturas.send_post(res[0], res[3])
+    else:
+        send_log_info("Não foram encontrados registros na tabela grupos_configuracoes_assinaturas para enviar.")
+    send_log_info("Processamento dos dados da tabela grupos_configuracoes_assinaturas finalizado.")
+
+def enviar_dados_assinantes():
+    send_log_info("Iniciando o processamento dos dados da tabela assinantes.")
+    listaAssinantes = assinantes.db_list()
+    if listaAssinantes:
+        for res in listaAssinantes:
+            assinantes.send_post(res[0], res[3], res[4], res[5], res[6])
+    else:
+        send_log_info("Não foram encontrados registros na tabela assinantes para enviar.")
+    send_log_info("Processamento dos dados da tabela assinantes finalizado.")
+
+def enviar_dados_assinaturas():
+    send_log_info("Iniciando o processamento dos dados da tabela assinaturas.")
+    listaAssinaturas = assinaturas.db_list()
+    if listaAssinaturas:
+        for res in listaAssinaturas:
+            id_grupo_configuracao_assinatura = gruposConfiguracoesAssinaturas.get_id_cloud(res[3])
+            lista_assinantes = assinaturas.db_list_assinaturas_assinantes(res[1])
+            assinaturas.send_post(res[0], id_grupo_configuracao_assinatura, lista_assinantes)
+    else:
+        send_log_info("Não foram encontrados registros na tabela assinaturas para enviar.")
+    send_log_info("Processamento dos dados da tabela assinaturas finalizado.")
+
+def enviar_dados_classificacoes_contas_bancarias():
+    send_log_info("Iniciando o processamento dos dados da tabela classificacoes_contas_bancarias.")
+    listaClassificacoesContasBancarias = classificacoesContasBancarias.db_list()
+    if listaClassificacoesContasBancarias:
+        for res in listaClassificacoesContasBancarias:
+            classificacoesContasBancarias.send_post(res[0], res[3])
+    else:
+        send_log_info("Não foram encontrados registros na tabela classificacoes_contas_bancarias para enviar.")
+    send_log_info("Processamento dos dados da tabela classificacoes_contas_bancarias finalizado.")
+
+def enviar_dados_contas_bancarias_entidades():
+    send_log_info("Iniciando o processamento dos dados da tabela contas_bancarias_entidades.")
+    listaContasBancariasEntidades = contasBancariasEntidades.db_list()
+    if listaContasBancariasEntidades:
+        for res in listaContasBancariasEntidades:
+            id_banco = bancos.get_id_cloud(res[3])
+            id_agencia = agenciasBancarias.get_id_cloud(res[4])
+            id_classificacao = classificacoesContasBancarias.get_id_cloud(res[5])
+            lista_tipos_contas = contasBancariasEntidades.db_list_tipos_contas(res[1])
+            lista_tipos_aplicacoes = contasBancariasEntidades.db_list_tipos_aplicacoes(res[1])
+            lista_arquivos = contasBancariasEntidades.db_list_arquivos(res[1])
+            lista_vigencias = contasBancariasEntidades.db_list_vigencias(res[1])
+            lista_marcadores = contasBancariasEntidades.db_list_marcadores(res[1])
+            contasBancariasEntidades.send_post(res[0], id_banco, id_agencia, id_classificacao, res[6], res[7], res[8], lista_tipos_contas, lista_tipos_aplicacoes, lista_arquivos, lista_vigencias, lista_marcadores)
+    else:
+        send_log_info("Não foram encontrados registros na tabela contas_bancarias_entidades para enviar.")
+    send_log_info("Processamento dos dados da tabela contas_bancarias_entidades finalizado.")
+
+def enviar_dados_marcadores():
+    send_log_info("Iniciando o processamento dos dados da tabela marcadores.")
+    listaMarcadores = marcadores.db_list()
+    if listaMarcadores:
+        for res in listaMarcadores:
+            marcadores.send_post(res[0], res[3])
+    else:
+        send_log_info("Não foram encontrados registros na tabela marcadores para enviar.")
+    send_log_info("Processamento dos dados da tabela marcadores finalizado.")
+
+def enviar_dados_contas_bancarias_entidades_exercicios():
+    send_log_info("Iniciando o processamento dos dados da tabela contas_bancarias_entidades_exercicios.")
+    listaContasBancariasEntidadesExercicios = contasBancariasEntidadesExercicios.db_list()
+    if listaContasBancariasEntidadesExercicios:
+        for res in listaContasBancariasEntidadesExercicios:
+            id_organograma = organogramas.get_id_cloud(res[3])
+            id_conta_bancaria_entidade = contasBancariasEntidades.get_id_cloud(res[4])
+            lista_recursos_administrados = contasBancariasEntidadesExercicios.db_list_recursos_administrados(res[1])
+            lista_recursos_movimentados = contasBancariasEntidadesExercicios.db_list_recursos_movimentados(res[1])
+            contasBancariasEntidadesExercicios.send_post(res[0], id_organograma, id_conta_bancaria_entidade, res[5], lista_recursos_administrados, lista_recursos_movimentados)
+    else:
+        send_log_info("Não foram encontrados registros na tabela contas_bancarias_entidades_exercicios para enviar.")
+    send_log_info("Processamento dos dados da tabela contas_bancarias_entidades_exercicios finalizado.")
+
+def enviar_dados_configuracoes_recursos():
+    send_log_info("Iniciando o processamento dos dados da tabela configuracoes_recursos.")
+    listaConfiguracoesRecursos = configuracoesRecursos.db_list()
+    if listaConfiguracoesRecursos:
+        for res in listaConfiguracoesRecursos:
+            lista_niveis = configuracoesRecursos.db_list_niveis(res[1])
+            configuracoesRecursos.send_post(res[0], res[3], res[4], res[5], lista_niveis)
+    else:
+        send_log_info("Não foram encontrados registros na tabela configuracoes_recursos para enviar.")
+    send_log_info("Processamento dos dados da tabela configuracoes_recursos finalizado.")
+
+def enviar_dados_recursos():
+    send_log_info("Iniciando o processamento dos dados da tabela recursos.")
+    listaRecursos = recursos.db_list()
+    if listaRecursos:
+        for res in listaRecursos:
+            id_configuracao_recurso = configuracoesRecursos.get_id_cloud(res[3])
+            id_recurso_superavit_financeiro = recursos.get_id_cloud(res[4])
+            lista_marcadores = recursos.db_list_marcadores(res[1])
+            recursos.send_post(res[0], id_configuracao_recurso, id_recurso_superavit_financeiro, res[5], res[6], res[7], lista_marcadores)
+    else:
+        send_log_info("Não foram encontrados registros na tabela recursos para enviar.")
+    send_log_info("Processamento dos dados da tabela recursos finalizado.")
+
+def enviar_dados_credores():
+    send_log_info("Iniciando o processamento dos dados da tabela credores.")
+    listaCredores = credores.db_list()
+    if listaCredores:
+        for res in listaCredores:
+            id_municipio_nascimento = municipios.get_id_cloud(res[3])
+            id_municipio_inscricao = municipios.get_id_cloud(res[4])
+            id_cbo = None # TODO verificar disponibilidade do serviço de leitura
+            lista_contas_bancarias = credores.db_list_contas_bancarias(res[1])
+            lista_enderecos = credores.db_list_enderecos(res[1])
+            lista_emails = credores.db_list_emails(res[1])
+            lista_telefones = credores.db_list_telefones(res[1])
+            credores.send_post(res[0], id_municipio_nascimento, id_municipio_inscricao, id_cbo, res[6], res[7], res[8], res[9], res[10], res[11], res[12], res[13], res[14], res[15], res[16], lista_contas_bancarias, lista_enderecos, lista_emails, lista_telefones)
+    else:
+        send_log_info("Não foram encontrados registros na tabela credores para enviar.")
+    send_log_info("Processamento dos dados da tabela credores finalizado.")
+
+def enviar_dados_retencoes():
+    send_log_info("Iniciando o processamento dos dados da tabela retencoes.")
+    listaRetencoes = retencoes.db_list()
+    if listaRetencoes:
+        for res in listaRetencoes:
+            retencoes.send_post(res[0], res[3], res[4], res[5])
+    else:
+        send_log_info("Não foram encontrados registros na tabela retencoes para enviar.")
+    send_log_info("Processamento dos dados da tabela retencoes finalizado.")
+
+def enviar_dados_retencoes_exercicios():
+    send_log_info("Iniciando o processamento dos dados da tabela retencoes_exercicios.")
+    listaRetencoesExercicios = retencoesExercicios.db_list()
+    if listaRetencoesExercicios:
+        for res in listaRetencoesExercicios:
+            id_retencao = retencoes.get_id_cloud(res[3])
+            id_receita = None # TODO dúvida sobre origem da informação
+            id_recurso = recursos.get_id_cloud(res[5])
+            retencoesExercicios.send_post(res[0], id_retencao, id_receita, id_recurso, res[6], res[7])
+    else:
+        send_log_info("Não foram encontrados registros na tabela retencoes_exercicios para enviar.")
+    send_log_info("Processamento dos dados da tabela retencoes_exercicios finalizado.")
+
+def enviar_dados_atividadesEconomicas_recursos():
+    send_log_info("Iniciando o processamento dos dados da tabela atividadesEconomicas_recursos.")
+    listaatividadesEconomicasRecursos = atividadesEconomicasRecursos.db_list()
+    if listaatividadesEconomicasRecursos:
+        for res in listaatividadesEconomicasRecursos:
+            id_recurso = recursos.get_id_cloud(res[3])
+            lista_contas_bancarias = atividadesEconomicasRecursos.db_list_contas_bancarias(res[1])
+            lista_contas_bancarias_movimentadoras = atividadesEconomicasRecursos.db_list_contas_bancarias_movimentadoras(res[1])
+            lista_retencoes = atividadesEconomicasRecursos.db_list_retencoes(res[1])
+            atividadesEconomicasRecursos.send_post(res[0], id_recurso, res[4], lista_contas_bancarias, lista_contas_bancarias_movimentadoras, lista_retencoes)
+    else:
+        send_log_info("Não foram encontrados registros na tabela atividadesEconomicas_recursos para enviar.")
+    send_log_info("Processamento dos dados da tabela atividadesEconomicas_recursos finalizado.")
+
+def enviar_dados_receitas_extras():
+    send_log_info("Iniciando o processamento dos dados da tabela receitas_extras.")
+    listaReceitasExtras = receitasExtras.db_list()
+    if listaReceitasExtras:
+        for res in listaReceitasExtras:
+            receitasExtras.send_post(res[0], res[3], res[4])
+    else:
+        send_log_info("Não foram encontrados registros na tabela receitas_extras para enviar.")
+    send_log_info("Processamento dos dados da tabela  finalizado.")
+
+def enviar_dados_receitas_extras_exercicios():
+    send_log_info("Iniciando o processamento dos dados da tabela receitas_extras_exercicios.")
+    listaReceitasExtrasExercicios = receitasExtrasExercicios.db_list()
+    if listaReceitasExtrasExercicios:
+        for res in listaReceitasExtrasExercicios:
+            id_receita_extra = receitasExtras.get_id_cloud(res[3])
+            lista_recursos = receitasExtrasExercicios.db_list_recursos(res[1])
+            receitasExtrasExercicios.send_post(res[0], id_receita_extra, res[4], lista_recursos)
+    else:
+        send_log_info("Não foram encontrados registros na tabela receitas_extras_exercicios para enviar.")
+    send_log_info("Processamento dos dados da tabela receitas_extras_exercicios finalizado.")
+
+def enviar_dados_naturezas_textos_juridicos_atos():
+    send_log_info("Iniciando o processamento dos dados da tabela naturezas_textos_juridicos_atos.")
+    listaNaturezasTextosJuridicosAtos = naturezasTextosJuridicosAtos.db_list()
+    if listaNaturezasTextosJuridicosAtos:
+        for res in listaNaturezasTextosJuridicosAtos:
+            naturezasTextosJuridicosAtos.send_post(res[0], res[3])
+			
+    else:
+        send_log_info("Não foram encontrados registros na tabela naturezas_textos_juridicos_atos para enviar.")
+    send_log_info("Processamento dos dados da tabela naturezas_textos_juridicos_atos finalizado.")
+	
+	def enviar_dados_acrescimos_anistias():
+    send_log_info("Iniciando o processamento dos dados da tabela acrescimos_anistias.")
+    listaAcrescimosanistias = acrescimosanistias.db_list()
+    if listaAcrescimosanistias:
+        for res in listaAcrescimosanistias:
+            id_precatorio = anistias.get_id_cloud(res[3])
+            acrescimosanistias.send_post(res[0], id_precatorio, res[4], res[5], res[6], res[7])
+    else:
+        send_log_info("Não foram encontrados registros na tabela acrescimos_anistias para enviar.")
+    send_log_info("Processamento dos dados da tabela acrescimos_anistias finalizado.")
+
+def enviar_dados_cancelamentos_anistias():
+    send_log_info("Iniciando o processamento dos dados da tabela cancelamentos_anistias.")
+    listaCancelamentosanistias = cancelamentosanistias.db_list()
+    if listaCancelamentosanistias:
+        for res in listaCancelamentosanistias:
+            id_precatorio = anistias.get_id_cloud(res[3])
+            cancelamentosanistias.send_post(res[0], id_precatorio, res[4], res[5], res[6], res[7])
+    else:
+        send_log_info("Não foram encontrados registros na tabela cancelamentos_anistias para enviar.")
+    send_log_info("Processamento dos dados da tabela cancelamentos_anistias finalizado.")
+
+def enviar_dados_dividas():
+    send_log_info("Iniciando o processamento dos dados da tabela dividas.")
+    listaDividas = dividas.db_list()
+    if listaDividas:
+        for res in listaDividas:
+            id_tipo = tiposDividas.get_id_cloud(res[3])
+            id_credor = credores.get_id_cloud(res[4])
+            id_credor_garantidor = credores.get_id_cloud(res[5])
+            id_ato = atos.get_id_cloud(res[6])
+            lista_parcelas = dividas.db_list_parcelas(res[1])
+            dividas.send_post(res[0], id_tipo, id_credor, id_credor_garantidor, id_ato, res[7], res[8], res[9], res[10], res[11], lista_parcelas)
+    else:
+        send_log_info("Não foram encontrados registros na tabela dividas para enviar.")
+    send_log_info("Processamento dos dados da tabela dividas finalizado.")
+
+def enviar_dados_acrescimos_dividas():
+    send_log_info("Iniciando o processamento dos dados da tabela acrescimos_dividas.")
+    listaAcrescimosDividas = acrescimosDividas.db_list()
+    if listaAcrescimosDividas:
+        for res in listaAcrescimosDividas:
+            id_divida = dividas.get_id_cloud(res[3])
+            acrescimosDividas.send_post(res[0], id_divida, res[4], res[5], res[6], res[7])
+    else:
+        send_log_info("Não foram encontrados registros na tabela acrescimos_dividas para enviar.")
+    send_log_info("Processamento dos dados da tabela acrescimos_dividas finalizado.")
+
+def enviar_dados_incorporacoes_encargos_dividas():
+    send_log_info("Iniciando o processamento dos dados da tabela incorporacoes_encargos_dividas.")
+    listaIncorporacoesEncargosDividas = incorporacoesEncargosDividas.db_list()
+    if listaIncorporacoesEncargosDividas:
+        for res in listaIncorporacoesEncargosDividas:
+            id_divida = dividas.get_id_cloud(res[3])
+            incorporacoesEncargosDividas.send_post(res[0], id_divida, res[4], res[5], res[6], res[7])
+    else:
+        send_log_info("Não foram encontrados registros na tabela incorporacoes_encargos_dividas para enviar.")
+    send_log_info("Processamento dos dados da tabela incorporacoes_encargos_dividas finalizado.")
+
+def enviar_dados_cancelamentos_dividas():
+    send_log_info("Iniciando o processamento dos dados da tabela cancelamentos_dividas.")
+    listaCancelamentosDividas = cancelamentosDividas.db_list()
+    if listaCancelamentosDividas:
+        for res in listaCancelamentosDividas:
+            id_divida = dividas.get_id_cloud(res[3])
+            cancelamentosDividas.send_post(res[0], id_divida, res[4], res[5], res[6], res[7], res[8], res[9], res[10])
+    else:
+        send_log_info("Não foram encontrados registros na tabela cancelamentos_dividas para enviar.")
+    send_log_info("Processamento dos dados da tabela cancelamentos_dividas finalizado.")
+
+def enviar_dados_incorporacoes_juros_dividas():
+    send_log_info("Iniciando o processamento dos dados da tabela incorporacoes_juros_dividas.")
+    listaIncorporacoesJurosDividas = incorporacoesJurosDividas.db_list()
+    if listaIncorporacoesJurosDividas:
+        for res in listaIncorporacoesJurosDividas:
+            id_divida = dividas.get_id_cloud(res[3])
+            incorporacoesJurosDividas.send_post(res[0], id_divida, res[4], res[5], res[6], res[7])
+    else:
+        send_log_info("Não foram encontrados registros na tabela incorporacoes_juros_dividas para enviar.")
+    send_log_info("Processamento dos dados da tabela incorporacoes_juros_dividas finalizado.")
+
+def enviar_dados_naturezas_diarias():
+    send_log_info("Iniciando o processamento dos dados da tabela naturezas_diarias.")
+    listaNaturezasDiarias = naturezasDiarias.db_list()
+    if listaNaturezasDiarias:
+        for res in listaNaturezasDiarias:
+            id_ato_concessao = atos.get_id_cloud(res[3])
+            id_ato_autorizacao = atos.get_id_cloud(res[4])
+            naturezasDiarias.send_post(res[0], id_ato_concessao, id_ato_autorizacao, res[5], res[6])
+    else:
+        send_log_info("Não foram encontrados registros na tabela naturezas_diarias para enviar.")
+    send_log_info("Processamento dos dados da tabela naturezas_diarias finalizado.")
+
+def enviar_dados_diarias():
+    send_log_info("Iniciando o processamento dos dados da tabela diarias.")
+    listaDiarias = diarias.db_list()
+    if listaDiarias:
+        for res in listaDiarias:
+            id_credor = credores.get_id_cloud(res[3])
+            id_organograma = organogramas.get_id_cloud(res[4])
+            lista_destinos = diarias.db_list_destinos(res[1])
+            diarias.send_post(res[0], id_credor, id_organograma, res[5], res[6], res[7], res[8], lista_destinos)
+    else:
+        send_log_info("Não foram encontrados registros na tabela diarias para enviar.")
+    send_log_info("Processamento dos dados da tabela diarias finalizado.")
+
+def enviar_dados_atividadesEconomicasInfCompOp():
+    send_log_info("Iniciando o processamento dos dados da tabela atividadesEconomicasInfCompOp.")
+    listaAlteracoesOrcamentariasReceitas = alteracoesOrcamentariasReceitas.db_list()
+    if listaAlteracoesOrcamentariasReceitas:
+        for res in listaAlteracoesOrcamentariasReceitas:
+            id_tipo = tiposAlteracoesOrcamentariasReceitas.get_id_cloud(res[3])
+            lista_receitas = alteracoesOrcamentariasReceitas.db_list_receitas(res[1])
+            alteracoesOrcamentariasReceitas.send_post(res[0], id_tipo, res[4], res[5], lista_receitas)
+    else:
+        send_log_info("Não foram encontrados registros na tabela atividadesEconomicasInfCompOp para enviar.")
+    send_log_info("Processamento dos dados da tabela atividadesEconomicasInfCompOp finalizado.")
+
+def enviar_dados_atividadesEconomicasInfCompOp_sancoes():
+    send_log_info("Iniciando o processamento dos dados da tabela atividadesEconomicasInfCompOp_sancoes.")
+    listaAlteracoesOrcamentariasReceitasSancoes = alteracoesOrcamentariasReceitasSancoes.db_list()
+    if listaAlteracoesOrcamentariasReceitasSancoes:
+        for res in listaAlteracoesOrcamentariasReceitasSancoes:
+            id_alteracao_orcamentaria_receita = alteracoesOrcamentariasReceitas.get_id_cloud(res[3])
+            id_ato = atos.get_id_cloud(res[4])
+            alteracoesOrcamentariasReceitasSancoes.send_post(res[0], id_alteracao_orcamentaria_receita, id_ato, res[5], res[6])
+    else:
+        send_log_info("Não foram encontrados registros na tabela atividadesEconomicasInfCompOp_sancoes para enviar.")
+    send_log_info("Processamento dos dados da tabela atividadesEconomicasInfCompOp_sancoes finalizado.")
+
+def enviar_dados_creditos_orcamentarios():
+    send_log_info("Iniciando o processamento dos dados da tabela creditos_orcamentarios.")
+    listaCreditosOrcamentarios = creditosOrcamentarios.db_list()
+    if listaCreditosOrcamentarios:
+        for res in listaCreditosOrcamentarios:
+            id_despesa = despesasNaoPrevistas.get_id_cloud(res[3])
+            lista_origens = creditosOrcamentarios.db_list_origens(res[1])
+            lista_recursos = creditosOrcamentarios.db_list_recursos(res[1])
+            creditosOrcamentarios.send_post(res[0], id_despesa, res[4], res[5], res[6], res[7], res[8], res[9], lista_origens, lista_recursos)
+    else:
+        send_log_info("Não foram encontrados registros na tabela creditos_orcamentarios para enviar.")
+    send_log_info("Processamento dos dados da tabela creditos_orcamentarios finalizado.")
+
+def enviar_dados_origens_creditos_orcamentarios():
+    send_log_info("Iniciando o processamento dos dados da tabela origens_creditos_orcamentarios.")
+    listaOrigensCreditosOrcamentarios = origensCreditosOrcamentarios.db_list()
+    if listaOrigensCreditosOrcamentarios:
+        for res in listaOrigensCreditosOrcamentarios:
+            origensCreditosOrcamentarios.send_post(res[0], res[3], res[4])
+    else:
+        send_log_info("Não foram encontrados registros na tabela origens_creditos_orcamentarios para enviar.")
+    send_log_info("Processamento dos dados da tabela origens_creditos_orcamentarios finalizado.")
+
+def enviar_dados_origens_creditos_orcamentarios_exercicios():
+    send_log_info("Iniciando o processamento dos dados da tabela origens_creditos_orcamentarios_exercicios.")
+    listaOrigensCreditosOrcamentariosExercicios = origensCreditosOrcamentariosExercicios.db_list()
+    if listaOrigensCreditosOrcamentariosExercicios:
+        for res in listaOrigensCreditosOrcamentariosExercicios:
+            id_origem_credito_orcamentario = origensCreditosOrcamentarios.get_id_cloud(res[3])
+            origensCreditosOrcamentariosExercicios.send_post(res[0], id_origem_credito_orcamentario, res[4])
+    else:
+        send_log_info("Não foram encontrados registros na tabela origens_creditos_orcamentarios_exercicios para enviar.")
+    send_log_info("Processamento dos dados da tabela origens_creditos_orcamentarios_exercicios finalizado.")
+
+def enviar_dados_contribuintes():
+    send_log_info("Iniciando o processamento dos dados da tabela contribuintes.")
+    listaContribuintes = contribuintes.db_list()
+    if listaContribuintes:
+        for res in listaContribuintes:
+            contribuintes.send_post(res[0], res[3], res[4], res[5])
+    else:
+        send_log_info("Não foram encontrados registros na tabela contribuintes para enviar.")
+    send_log_info("Processamento dos dados da tabela contribuintes finalizado.")
+
+def enviar_dados_configuracoes_planos_contas():
+    send_log_info("Iniciando o processamento dos dados da tabela configuracoes_planos_contas.")
+    listaConfiguracoesPlanosContas = configuracoesPlanosContas.db_list()
+    if listaConfiguracoesPlanosContas:
+        for res in listaConfiguracoesPlanosContas:
+            lista_niveis = configuracoesPlanosContas.db_list_niveis(res[1])
+            configuracoesPlanosContas.send_post(res[0], res[3], lista_niveis)
+    else:
+        send_log_info("Não foram encontrados registros na tabela configuracoes_planos_contas para enviar.")
+    send_log_info("Processamento dos dados da tabela configuracoes_planos_contas finalizado.")
+
+def enviar_dados_creditos_orcamentarios_conclusoes_propostas():
+    send_log_info("Iniciando o processamento dos dados da tabela creditos_orcamentarios_conclusoes_propostas.")
+    listaCreditosOrcamentariosConclusoesPropostas = creditosOrcamentariosConclusoesPropostas.db_list()
+    if listaCreditosOrcamentariosConclusoesPropostas:
+        for res in listaCreditosOrcamentariosConclusoesPropostas:
+            lista_creditos = creditosOrcamentariosConclusoesPropostas.db_list_creditos(res[1])
+            creditosOrcamentariosConclusoesPropostas.send_post(res[0], res[3], res[4], lista_creditos)
+    else:
+        send_log_info("Não foram encontrados registros na tabela creditos_orcamentarios_conclusoes_propostas para enviar.")
+    send_log_info("Processamento dos dados da tabela creditos_orcamentarios_conclusoes_propostas finalizado.")
+
+def enviar_dados_creditos_orcamentarios_envios_legislativos():
+    send_log_info("Iniciando o processamento dos dados da tabela creditos_orcamentarios_envios_legislativos.")
+    listaCreditosOrcamentariosEnviosLegislativos = creditosOrcamentariosEnviosLegislativos.db_list()
+    if listaCreditosOrcamentariosEnviosLegislativos:
+        for res in listaCreditosOrcamentariosEnviosLegislativos:
+            lista_creditos = creditosOrcamentariosEnviosLegislativos.db_list_creditos(res[1])
+            creditosOrcamentariosEnviosLegislativos.send_post(res[0], res[3], res[4], lista_creditos)
+    else:
+        send_log_info("Não foram encontrados registros na tabela creditos_orcamentarios_envios_legislativos para enviar.")
+    send_log_info("Processamento dos dados da tabela creditos_orcamentarios_envios_legislativos finalizado.")
+
+def enviar_dados_creditos_orcamentarios_sancoes():
+    send_log_info("Iniciando o processamento dos dados da tabela creditos_orcamentarios_sancoes.")
+    listaCreditosOrcamentariosSancoes = creditosOrcamentariosSancoes.db_list()
+    if listaCreditosOrcamentariosSancoes:
+        for res in listaCreditosOrcamentariosSancoes:
+            id_ato_autorizativo = atos.get_id_cloud(res[3])
+            id_ato_abertura = atos.get_id_cloud(res[4])
+            lista_creditos = creditosOrcamentariosSancoes.db_list_creditos(res[1])
+            creditosOrcamentariosSancoes.send_post(res[0], id_ato_autorizativo, id_ato_abertura, res[5], res[6], lista_creditos)
+    else:
+        send_log_info("Não foram encontrados registros na tabela creditos_orcamentarios_sancoes para enviar.")
+    send_log_info("Processamento dos dados da tabela creditos_orcamentarios_sancoes finalizado.")
+
+def enviar_dados_bloqueios():
+    send_log_info("Iniciando o processamento dos dados da tabela bloqueios.")
+    listaBloqueios = bloqueios.db_list()
+    if listaBloqueios:
+        for res in listaBloqueios:
+            id_despesa = despesasNaoPrevistas.get_id_cloud(res[3])
+            id_tipo_bloqueio = tiposBloqueios.get_id_cloud(res[4])
+            id_processo_administrativo = None # TODO ver origem da informação
+            id_contratacao = None # TODO ver origem da informação
+            lista_recursos = bloqueios.db_list_recursos(res[1])
+            bloqueios.send_post(res[0], id_despesa, id_tipo_bloqueio, id_processo_administrativo, id_contratacao, res[7], res[8], res[9], res[10], res[11], lista_recursos)
+    else:
+        send_log_info("Não foram encontrados registros na tabela bloqueios para enviar.")
+    send_log_info("Processamento dos dados da tabela bloqueios finalizado.")
+
+def enviar_dados_desbloqueios():
+    send_log_info("Iniciando o processamento dos dados da tabela desbloqueios.")
+    listaDesbloqueios = desbloqueios.db_list()
+    if listaDesbloqueios:
+        for res in listaDesbloqueios:
+            id_bloqueio = bloqueios.get_id_cloud(res[3])
+            lista_recursos = desbloqueios.db_list_recursos(res[1])
+            desbloqueios.send_post(res[0], id_bloqueio, res[4], res[5], res[6], res[7], res[8], lista_recursos)
+    else:
+        send_log_info("Não foram encontrados registros na tabela desbloqueios para enviar.")
+    send_log_info("Processamento dos dados da tabela desbloqueios finalizado.")
+
+def enviar_dados_contrato_rateio():
+    send_log_info("Iniciando o processamento dos dados da tabela contrato_rateio.")
+    listaContratoRateio = contratoRateio.db_list()
+    if listaContratoRateio:
+        for res in listaContratoRateio:
+            lista_entes_consorciados_item = contratoRateio.db_list_entes_consorciados_item(res[1])
+            contratoRateio.send_post(res[0], res[3], res[4], res[5], res[6], lista_entes_consorciados_item)
+    else:
+        send_log_info("Não foram encontrados registros na tabela contrato_rateio para enviar.")
+    send_log_info("Processamento dos dados da tabela contrato_rateio finalizado.")
+
+def enviar_dados_lancamentos_receitas():
+    send_log_info("Iniciando o processamento dos dados da tabela lancamentos_receitas.")
+    listaLancamentosReceitas = lancamentosReceitas.db_list()
+    if listaLancamentosReceitas:
+        for res in listaLancamentosReceitas:
+            id_credor = credores(res[3])
+            id_receita = receitasExtras.get_id_cloud(res[4])
+            id_contrato_rateio = contratoRateio.get_id_cloud(res[5])
+            lista_recursos = lancamentosReceitas.db_list_recursos(res[1])
+            lista_entes_consorciados = lancamentosReceitas.db_list_entes_consorciados(res[1])
+            lancamentosReceitas.send_post(res[0], id_credor, id_receita, id_contrato_rateio, res[6], res[7], res[8], res[9], lista_recursos, lista_entes_consorciados)
+    else:
+        send_log_info("Não foram encontrados registros na tabela lancamentos_receitas para enviar.")
+    send_log_info("Processamento dos dados da tabela lancamentos_receitas finalizado.")
+
+def enviar_dados_anulacoes_lancamentos_receitas():
+    send_log_info("Iniciando o processamento dos dados da tabela anulacoes_lancamentos_receitas.")
+    listaAnulacoesLancamentosReceitas = anulacoesLancamentosReceitas.db_list()
+    if listaAnulacoesLancamentosReceitas:
+        for res in listaAnulacoesLancamentosReceitas:
+            id_lancamento_receita = lancamentosReceitas.get_id_cloud(res[3])
+            lista_recursos = anulacoesLancamentosReceitas.db_list_recursos(res[1])
+            lista_entes_consorciados = anulacoesLancamentosReceitas.db_list_entes_consorciados(res[1])
+            anulacoesLancamentosReceitas.send_post(res[0], id_lancamento_receita, res[4], res[5], res[6], res[7], lista_recursos, lista_entes_consorciados)
+    else:
+        send_log_info("Não foram encontrados registros na tabela anulacoes_lancamentos_receitas para enviar.")
+    send_log_info("Processamento dos dados da tabela anulacoes_lancamentos_receitas finalizado.")
+
+def enviar_dados_componentes_contas_correntes():
+    send_log_info("Iniciando o processamento dos dados da tabela componentes_contas_correntes.")
+    listaComponentesContasCorrentes = componentesContasCorrentes.db_list()
+    if listaComponentesContasCorrentes:
+        for res in listaComponentesContasCorrentes:
+            id_configuracao_plano_contas = configuracoesPlanosContas.get_id_cloud(res[3])
+            lista_componentes_listas = componentesContasCorrentes.db_list_componentes_listas(res[1])
+            lista_componentes_documentos = componentesContasCorrentes.db_list_componentes_documentos(res[1])
+            componentesContasCorrentes.send_post(res[0], id_configuracao_plano_contas, res[4], res[5], res[6], res[7], res[8], res[9], res[10], res[11], lista_componentes_listas, lista_componentes_documentos)
+    else:
+        send_log_info("Não foram encontrados registros na tabela componentes_contas_correntes para enviar.")
+    send_log_info("Processamento dos dados da tabela componentes_contas_correntes finalizado.")
+
+def enviar_dados_configuracoes_contas_correntes():
+    send_log_info("Iniciando o processamento dos dados da tabela configuracoes_contas_correntes.")
+    listaConfiguracoesContasCorrentes = configuracoesContasCorrentes.db_list()
+    if listaConfiguracoesContasCorrentes:
+        for res in listaConfiguracoesContasCorrentes:
+            id_configuracao_plano_contas = configuracoesPlanosContas.get_id_cloud(res[3])
+            lista_composicoes = configuracoesContasCorrentes.db_list_composicoes(res[1])
+            configuracoesContasCorrentes.send_post(res[0], id_configuracao_plano_contas, res[4], res[5], res[6], res[7], res[8], lista_composicoes)
+    else:
+        send_log_info("Não foram encontrados registros na tabela configuracoes_contas_correntes para enviar.")
+    send_log_info("Processamento dos dados da tabela configuracoes_contas_correntes finalizado.")
+
+def enviar_dados_contas_contabeis():
+    send_log_info("Iniciando o processamento dos dados da tabela contas_contabeis.")
+    listaContasContabeis = contasContabeis.db_list()
+    if listaContasContabeis:
+        for res in listaContasContabeis:
+            id_configuracao_conta = configuracoesContasCorrentes(res[3])
+            contasContabeis.send_post(res[0], id_configuracao_conta, res[4], res[5], res[6], res[7], res[8], res[9])
+    else:
+        send_log_info("Não foram encontrados registros na tabela contas_contabeis para enviar.")
+    send_log_info("Processamento dos dados da tabela contas_contabeis finalizado.")
+
+def enviar_dados_fases():
+    send_log_info("Iniciando o processamento dos dados da tabela fases.")
+    listaFases = fases.db_list()
+    if listaFases:
+        for res in listaFases:
+            id_configuracao = None # TODO ver origem da informação
+            fases.send_post(res[0], id_configuracao, res[4], res[5], res[6])
+    else:
+        send_log_info("Não foram encontrados registros na tabela fases para enviar.")
+    send_log_info("Processamento dos dados da tabela fases finalizado.")
+
+def enviar_dados_saldos_iniciais():
+    send_log_info("Iniciando o processamento dos dados da tabela saldos_iniciais.")
+    listaSaldosIniciais = saldosIniciais.db_list()
+    if listaSaldosIniciais:
+        for res in listaSaldosIniciais:
+            id_configuracao_plano_contas = configuracoesPlanosContas.get_id_cloud(res[3])
+            saldosIniciais.send_post(res[0], id_configuracao_plano_contas, res[4], res[5])
+    else:
+        send_log_info("Não foram encontrados registros na tabela saldos_iniciais para enviar.")
+    send_log_info("Processamento dos dados da tabela saldos_iniciais finalizado.")
+
+def enviar_dados_saldos_iniciais_itens():
+    send_log_info("Iniciando o processamento dos dados da tabela saldos_iniciais_itens.")
+    listaSaldosIniciaisItens = saldosIniciaisItens.db_list()
+    if listaSaldosIniciaisItens:
+        for res in listaSaldosIniciaisItens:
+            id_conta_contabil = contasContabeis.get_id_cloud(res[3])
+            id_saldo_inicial = saldosIniciais.get_id_cloud(res[4])
+            id_fase = fases.get_id_cloud(res[5])
+            saldosIniciaisItens.send_post(res[0], id_conta_contabil, id_saldo_inicial, id_fase, res[6], res[7], res[8], res[9])
+    else:
+        send_log_info("Não foram encontrados registros na tabela saldos_iniciais_itens para enviar.")
+    send_log_info("Processamento dos dados da tabela saldos_iniciais_itens finalizado.")
+
+def enviar_dados_saldos_iniciais_extras():
+    send_log_info("Iniciando o processamento dos dados da tabela saldos_iniciais_extras.")
+    listaSaldosIniciaisExtras = saldosIniciaisExtras.db_list()
+    if listaSaldosIniciaisExtras:
+        for res in listaSaldosIniciaisExtras:
+            id_classificacao = None # TODO ver origem da informação
+            lista_recursos = saldosIniciaisExtras.db_list_recursos(res[1])
+            saldosIniciaisExtras.send_post(res[0], id_classificacao, res[4], res[5], res[6], res[7], lista_recursos)
+    else:
+        send_log_info("Não foram encontrados registros na tabela saldos_iniciais_extras para enviar.")
+    send_log_info("Processamento dos dados da tabela saldos_iniciais_extras finalizado.")
+
+def enviar_dados_lancamentos_aberturas():
+    send_log_info("Iniciando o processamento dos dados da tabela lancamentos_aberturas.")
+    listaLancamentosAberturas = lancamentosAberturas.db_list()
+    if listaLancamentosAberturas:
+        for res in listaLancamentosAberturas:
+            id_lancamento_abertura_exercicio = lancamentosAberturasExercicios.get_id_cloud(res[3])
+            id_fase = fases.get_id_cloud(res[4])
+            lista_itens = lancamentosAberturas.db_list_itens(res[1])
+            lancamentosAberturas.send_post(res[0], id_lancamento_abertura_exercicio, id_fase, res[5], res[6], res[7], lista_itens)
+    else:
+        send_log_info("Não foram encontrados registros na tabela lancamentos_aberturas para enviar.")
+    send_log_info("Processamento dos dados da tabela lancamentos_aberturas finalizado.")
+
+def enviar_dados_lancamentos_aberturas_exercicios():
+    send_log_info("Iniciando o processamento dos dados da tabela lancamentos_aberturas_exercicios.")
+    listaLancamentosAberturasExercicios = lancamentosAberturasExercicios.db_list()
+    if listaLancamentosAberturasExercicios:
+        for res in listaLancamentosAberturasExercicios:
+            id_configuracao_plano_contas = configuracoesPlanosContas.get_id_cloud(res[3])
+            lancamentosAberturasExercicios.send_post(res[0], id_configuracao_plano_contas, res[4], res[5])
+    else:
+        send_log_info("Não foram encontrados registros na tabela lancamentos_aberturas_exercicios para enviar.")
+    send_log_info("Processamento dos dados da tabela lancamentos_aberturas_exercicios finalizado.")
+
+def enviar_dados_contas_correntes_lancamentos_aberturas_itens():
+    send_log_info("Iniciando o processamento dos dados da tabela contas_correntes_lancamentos_aberturas_itens.")
+    listaContasCorrentesLancamentosAberturasItens = contasCorrentesLancamentosAberturasItens.db_list()
+    if listaContasCorrentesLancamentosAberturasItens:
+        for res in listaContasCorrentesLancamentosAberturasItens:
+            id_lancamento_abertura_item = None # TODO ver origem da informação
+            id_conta_corrente = contasContabeis.get_id_cloud(res[4])
+            lista_componentes = contasCorrentesLancamentosAberturasItens.db_list_componentes(res[1])
+            contasCorrentesLancamentosAberturasItens.send_post(res[0], id_lancamento_abertura_item, id_conta_corrente, res[5], res[6], res[7], lista_componentes)
+    else:
+        send_log_info("Não foram encontrados registros na tabela contas_correntes_lancamentos_aberturas_itens para enviar.")
+    send_log_info("Processamento dos dados da tabela contas_correntes_lancamentos_aberturas_itens finalizado.")
+
+def enviar_dados_lancamentos_encerramentos_exercicios():
+    send_log_info("Iniciando o processamento dos dados da tabela lancamentos_encerramentos_exercicios.")
+    listaLancamentosEncerramentosExercicios = lancamentosEncerramentosExercicios.db_list()
+    if listaLancamentosEncerramentosExercicios:
+        for res in listaLancamentosEncerramentosExercicios:
+            id_configuracao_plano_contas = configuracoesPlanosContas.get_id_cloud(res[3])
+            lancamentosEncerramentosExercicios.send_post(res[0], id_configuracao_plano_contas, res[4], res[5])
+    else:
+        send_log_info("Não foram encontrados registros na tabela lancamentos_encerramentos_exercicios para enviar.")
+    send_log_info("Processamento dos dados da tabela lancamentos_encerramentos_exercicios finalizado.")
+
+def enviar_dados_lancamentos_encerramentos():
+    send_log_info("Iniciando o processamento dos dados da tabela lancamentos_encerramentos.")
+    listaLancamentosEncerramentos = lancamentosEncerramentos.db_list()
+    if listaLancamentosEncerramentos:
+        for res in listaLancamentosEncerramentos:
+            id_lancamento_encerramento_exercicio = lancamentosEncerramentosExercicios.get_id_cloud(res[3])
+            id_fase = fases.get_id_cloud(res[4])
+            lista_itens = lancamentosEncerramentos.db_list_itens(res[1])
+            lancamentosEncerramentos.send_post(res[0], id_lancamento_encerramento_exercicio, id_fase, res[5], res[6], res[7], lista_itens)
+    else:
+        send_log_info("Não foram encontrados registros na tabela lancamentos_encerramentos para enviar.")
+    send_log_info("Processamento dos dados da tabela lancamentos_encerramentos finalizado.")
+
+def enviar_dados_contas_correntes_lancamentos_encerramentos_itens():
+    send_log_info("Iniciando o processamento dos dados da tabela contas_correntes_lancamentos_encerramentos_itens.")
+    listaContasCorrentesLancamentosEncerramentosItens = contasCorrentesLancamentosEncerramentosItens.db_list()
+    if listaContasCorrentesLancamentosEncerramentosItens:
+        for res in listaContasCorrentesLancamentosEncerramentosItens:
+            id_lancamento_encerramento_item = None # TODO ver origem da informação
+            id_conta_corrente = configuracoesContasCorrentes.get_id_cloud(res[4])
+            lista_componentes = contasCorrentesLancamentosEncerramentosItens.db_list_componentes(res[1])
+            contasCorrentesLancamentosEncerramentosItens.send_post(res[0], id_lancamento_encerramento_item, id_conta_corrente, res[5], res[6], res[7], lista_componentes)
+    else:
+        send_log_info("Não foram encontrados registros na tabela contas_correntes_lancamentos_encerramentos_itens para enviar.")
+    send_log_info("Processamento dos dados da tabela contas_correntes_lancamentos_encerramentos_itens finalizado.")
+
+def enviar_dados_contas_correntes_lancamentos_contabeis_itens():
+    send_log_info("Iniciando o processamento dos dados da tabela contas_correntes_lancamentos_contabeis_itens.")
+    listaContasCorrentesLancamentosContabeisItens = contasCorrentesLancamentosContabeisItens.db_list()
+    if listaContasCorrentesLancamentosContabeisItens:
+        for res in listaContasCorrentesLancamentosContabeisItens:
+            id_lancamento_contabil_item = None # TODO ver origem da informação
+            id_conta_corrente = configuracoesContasCorrentes.get_id_cloud(res[4])
+            lista_componentes = contasCorrentesLancamentosContabeisItens.db_list_componenetes(res[1])
+            contasCorrentesLancamentosContabeisItens.send_post(res[0], id_lancamento_contabil_item, id_conta_corrente, res[5], res[6], res[7], lista_componentes)
+    else:
+        send_log_info("Não foram encontrados registros na tabela contas_correntes_lancamentos_contabeis_itens para enviar.")
+    send_log_info("Processamento dos dados da tabela contas_correntes_lancamentos_contabeis_itens finalizado.")
+
+def enviar_dados_lancamentos_contabeis():
+    send_log_info("Iniciando o processamento dos dados da tabela lancamentos_contabeis.")
+    listaLancamentosContabeis = lancamentosContabeis.db_list()
+    if listaLancamentosContabeis:
+        for res in listaLancamentosContabeis:
+            id_configuracao = configuracoesPlanosContas.get_id_cloud(res[3])
+            lista_itens = lancamentosContabeis.db_list_itens(res[1])
+            lancamentosContabeis.send_post(res[0], id_configuracao, res[4], res[5], res[6], res[7], lista_itens)
+    else:
+        send_log_info("Não foram encontrados registros na tabela lancamentos_contabeis para enviar.")
+    send_log_info("Processamento dos dados da tabela lancamentos_contabeis finalizado.")
+
+def enviar_dados_estornos_lancamentos_contabeis():
+    send_log_info("Iniciando o processamento dos dados da tabela estornos_lancamentos_contabeis.")
+    listaEstornosLancamentosContabeis = estornosLancamentosContabeis.db_list()
+    if listaEstornosLancamentosContabeis:
+        for res in listaEstornosLancamentosContabeis:
+            id_configuracao = configuracoesPlanosContas.get_id_cloud(res[3])
+            id_lancamento_contabil = lancamentosContabeis.get_id_cloud(res[4])
+            lista_itens = estornosLancamentosContabeis.db_list_itens(res[1])
+            estornosLancamentosContabeis.send_post(res[0], id_configuracao, id_lancamento_contabil, res[5], res[6], res[7], lista_itens)
+    else:
+        send_log_info("Não foram encontrados registros na tabela estornos_lancamentos_contabeis para enviar.")
+    send_log_info("Processamento dos dados da tabela estornos_lancamentos_contabeis finalizado.")
+
+def enviar_dados_prestacoes_contas():
+    send_log_info("Iniciando o processamento dos dados da tabela prestacoes_contas.")
+    listaPrestacoesContas = prestacoesContas.db_list()
+    if listaPrestacoesContas:
+        for res in listaPrestacoesContas:
+            id_adiantamento =  empenhosAdiantamentos.get_id_cloud(res[3])
+            lista_advogadosarquivos = prestacoesContas.db_list_advogadosarquivos(res[1])
+            prestacoesContas.send_post(res[0], id_adiantamento, res[4], res[5], res[6], res[7], lista_advogadosarquivos)
+    else:
+        send_log_info("Não foram encontrados registros na tabela prestacoes_contas para enviar.")
+    send_log_info("Processamento dos dados da tabela prestacoes_contas finalizado.")
+
+def enviar_dados_anulacoes_prestacoes_contas():
+    send_log_info("Iniciando o processamento dos dados da tabela anulacoes_prestacoes_contas.")
+    listaAnulacoesPrestacoesContas = anulacoesPrestacoesContas.db_list()
+    if listaAnulacoesPrestacoesContas:
+        for res in listaAnulacoesPrestacoesContas:
+            id_prestacao_conta = prestacoesContas.get_id_cloud(res[3])
+            lista_advogadosarquivos = anulacoesPrestacoesContas.db_list_advogadosarquivos(res[1])
+            anulacoesPrestacoesContas.send_post(res[0], id_prestacao_conta, res[4], res[5], res[6], res[7], res[8], lista_advogadosarquivos)
+    else:
+        send_log_info("Não foram encontrados registros na tabela anulacoes_prestacoes_contas para enviar.")
+    send_log_info("Processamento dos dados da tabela anulacoes_prestacoes_contas finalizado.")
+
+def enviar_dados_contribuintes_receitas_arrecadacoes():
+    send_log_info("Iniciando o processamento dos dados da tabela contribuintes_receitas_arrecadacoes.")
+    listaContribuintesReceitasArrecadacoes = contribuintesReceitasArrecadacoes.db_list()
+    if listaContribuintesReceitasArrecadacoes:
+        for res in listaContribuintesReceitasArrecadacoes:
+            id_contribuinte = contribuintes.get_id_cloud(res[3])
+            id_receita_arrecadacao = None # TODO confirmar origem da informação
+            contribuintesReceitasArrecadacoes.send_post(res[0], id_contribuinte, id_receita_arrecadacao, res[5], res[6], res[7], res[8])
+    else:
+        send_log_info("Não foram encontrados registros na tabela contribuintes_receitas_arrecadacoes para enviar.")
+    send_log_info("Processamento dos dados da tabela contribuintes_receitas_arrecadacoes finalizado.")
+
+def enviar_dados_contribuintes_receitas_anulacoes_arrecadacoes():
+    send_log_info("Iniciando o processamento dos dados da tabela contribuintes_receitas_anulacoes_arrecadacoes.")
+    listaContribuintesReceitasAnulacoesArrecadacoes = contribuintesReceitasAnulacoesArrecadacoes.db_list()
+    if listaContribuintesReceitasAnulacoesArrecadacoes:
+        for res in listaContribuintesReceitasAnulacoesArrecadacoes:
+            id_contribuinte_receita_arrecadacao = contribuintesReceitasArrecadacoes.get_id_cloud(res[3])
+            id_receita_anulacao_arrecadacao = None # TODO
+            contribuintesReceitasAnulacoesArrecadacoes.send_post(res[0], id_contribuinte_receita_arrecadacao, id_receita_anulacao_arrecadacao, res[5], res[6], res[7], res[8])
+    else:
+        send_log_info("Não foram encontrados registros na tabela contribuintes_receitas_anulacoes_arrecadacoes para enviar.")
+    send_log_info("Processamento dos dados da tabela contribuintes_receitas_anulacoes_arrecadacoes finalizado.")
+
+def enviar_dados_funcionarios():
+    send_log_info("Iniciando o processamento dos dados da tabela funcionarios.")
+    listaFuncionarios = funcionarios.db_list()
+    if listaFuncionarios:
+        for res in listaFuncionarios:
+            funcionarios.send_post(res[0], res[3], res[4], res[5])
+    else:
+        send_log_info("Não foram encontrados registros na tabela funcionarios para enviar.")
+    send_log_info("Processamento dos dados da tabela funcionarios finalizado.")
+
+def enviar_dados_parametros_orcamentarios():
+    send_log_info("Iniciando o processamento dos dados da tabela parametros_orcamentarios.")
+    listaParametrosOrcamentarios = parametrosOrcamentarios.db_list()
+    if listaParametrosOrcamentarios:
+        for res in listaParametrosOrcamentarios:
+            id_config_natureza_despesa = configuracoesNaturezasDespesas.get_id_cloud(res[3])
+            id_config_natureza_receita = configuracoesNaturezasReceitas.get_id_cloud(res[4])
+            id_config_organograma = configuracoesOrganogramas.get_id_cloud(res[5])
+            id_config_recurso = configuracoesRecursos.get_id_cloud(res[6])
+            id_config_funcional = configuracoesFuncionais.get_id_cloud(res[7])
+            parametrosOrcamentarios.send_post(res[0], id_config_natureza_despesa, id_config_natureza_receita, id_config_organograma, id_config_recurso, id_config_funcional, res[8], res[9])
+    else:
+        send_log_info("Não foram encontrados registros na tabela parametros_orcamentarios para enviar.")
+    send_log_info("Processamento dos dados da tabela parametros_orcamentarios finalizado.")
+
+def enviar_dados_parametros_globais():
+    send_log_info("Iniciando o processamento dos dados da tabela parametros_globais.")
+    listaParametrosGlobais = parametrosGlobais.db_list()
+    if listaParametrosGlobais:
+        for res in listaParametrosGlobais:
+            parametrosGlobais.send_post(res[0], res[3], res[4], res[5], res[6], res[7])
+    else:
+        send_log_info("Não foram encontrados registros na tabela parametros_globais para enviar.")
+    send_log_info("Processamento dos dados da tabela parametros_globais finalizado.")
+
+def enviar_dados_parametros_escrituracoes():
+    send_log_info("Iniciando o processamento dos dados da tabela parametros_escrituracoes.")
+    listaParametrosEscrituracoes = parametrosEscrituracoes.db_list()
+    if listaParametrosEscrituracoes:
+        for res in listaParametrosEscrituracoes:
+            id_configuracao_plano_contas = configuracoesPlanosContas.get_id_cloud(res[3])
+            parametrosEscrituracoes.send_post(res[0], id_configuracao_plano_contas, res[4])
+    else:
+        send_log_info("Não foram encontrados registros na tabela parametros_escrituracoes para enviar.")
+    send_log_info("Processamento dos dados da tabela parametros_escrituracoes finalizado.")
+
+def enviar_dados_fontes_adicionais():
+    send_log_info("Iniciando o processamento dos dados da tabela fontes_adicionais.")
+    listaFontesAdicionais = fontesAdicionais.db_list()
+    if listaFontesAdicionais:
+        for res in listaFontesAdicionais:
+            fontesAdicionais.send_post(res[0], res[3], res[4], res[5])
+    else:
+        send_log_info("Não foram encontrados registros na tabela fontes_adicionais para enviar.")
+    send_log_info("Processamento dos dados da tabela fontes_adicionais finalizado.")
+
+def enviar_dados_configuracoes_equivalencias_itens():
+    send_log_info("Iniciando o processamento dos dados da tabela configuracoes_equivalencias_itens.")
+    listaConfiguracoesEquivalencias = configuracoesEquivalencias.db_list()
+    if listaConfiguracoesEquivalencias:
+        for res in listaConfiguracoesEquivalencias:
+            id_configuracao_plano_contas = configuracoesPlanosContas.get_id_cloud(res[3])
+            lista_itens_equivalencias = configuracoesEquivalencias.db_list_itens(res[1])
+            configuracoesEquivalencias.send_post(res[0], id_configuracao_plano_contas, res[4], res[5], lista_itens_equivalencias)
+    else:
+        send_log_info("Não foram encontrados registros na tabela configuracoes_equivalencias_itens para enviar.")
+    send_log_info("Processamento dos dados da tabela configuracoes_equivalencias_itens finalizado.")
+
+def enviar_dados_configuracoes_desdobramentos_contas():
+    send_log_info("Iniciando o processamento dos dados da tabela configuracoes_desdobramentos_contas.")
+    listaConfiguracoesDesdobramentosContas = configuracoesDesdobramentosContas.db_list()
+    if listaConfiguracoesDesdobramentosContas:
+        for res in listaConfiguracoesDesdobramentosContas:
+            id_configuracao_plano_contas = configuracoesPlanosContas.get_id_cloud(res[3])
+            id_configuracao_equivalencia = configuracoesEquivalencias.get_id_cloud(res[4])
+            lista_detalhamentos = configuracoesDesdobramentosContas.db_list_detalhamentos(res[1])
+            configuracoesDesdobramentosContas.send_post(res[0], id_configuracao_plano_contas, id_configuracao_equivalencia, res[5], res[6], res[7], res[8], lista_detalhamentos)
+    else:
+        send_log_info("Não foram encontrados registros na tabela configuracoes_desdobramentos_contas para enviar.")
+    send_log_info("Processamento dos dados da tabela configuracoes_desdobramentos_contas finalizado.")
+
+def enviar_dados_eventos():
+    send_log_info("Iniciando o processamento dos dados da tabela eventos.")
+    listaEventos = eventos.db_list()
+    if listaEventos:
+        for res in listaEventos:
+            id_configuracao_plano_contas = configuracoesPlanosContas.get_id_cloud(res[3])
+            lista_itens = eventos.db_list_itens(res[1])
+            eventos.send_post(res[0], id_configuracao_plano_contas, res[4], res[5], res[6], res[7], res[8], res[9], res[10], res[11], res[12], res[13], res[14], res[15], lista_itens)
+    else:
+        send_log_info("Não foram encontrados registros na tabela eventos para enviar.")
+    send_log_info("Processamento dos dados da tabela eventos finalizado.")
+
+def enviar_dados_advogadosarquivos_liquidacoes():
+    send_log_info("Iniciando o processamento dos dados da tabela advogadosarquivos_liquidacoes.")
+    listaadvogadosarquivosLiquidacoes = advogadosarquivosLiquidacoes.db_list()
+    if listaadvogadosarquivosLiquidacoes:
+        for res in listaadvogadosarquivosLiquidacoes:
+            id_liquidacao = liquidacoes.get_id_cloud(res[3])
+            id_comprovante = advogadosarquivos.get_id_cloud(res[4])
+            advogadosarquivosLiquidacoes.send_post(res[0], id_liquidacao, id_comprovante, res[5], res[6])
+    else:
+        send_log_info("Não foram encontrados registros na tabela advogadosarquivos_liquidacoes para enviar.")
+    send_log_info("Processamento dos dados da tabela advogadosarquivos_liquidacoes finalizado.")
+
+def enviar_dados_anulacoes_em_liquidacoes():
+    send_log_info("Iniciando o processamento dos dados da tabela anulacoes_em_liquidacoes.")
+    listaAnulacoesEmLiquidacoes = anulacoesEmLiquidacoes.db_list()
+    if listaAnulacoesEmLiquidacoes:
+        for res in listaAnulacoesEmLiquidacoes:
+            id_em_liquidacao = emLiquidacoes.get_id_cloud(res[3])
+            anulacoesEmLiquidacoes.send_post(res[0], id_em_liquidacao, res[4], res[5], res[6], res[7], res[8], res[9])
+    else:
+        send_log_info("Não foram encontrados registros na tabela anulacoes_em_liquidacoes para enviar.")
+    send_log_info("Processamento dos dados da tabela anulacoes_em_liquidacoes finalizado.")
+
+def enviar_dados_em_liquidacoes():
+    send_log_info("Iniciando o processamento dos dados da tabela em_liquidacoes.")
+    listaEmLiquidacoes = emLiquidacoes.db_list()
+    if listaEmLiquidacoes:
+        for res in listaEmLiquidacoes:
+            id_empenho = None # TODO ver origem da informação
+            lista_advogadosarquivos = emLiquidacoes.db_list_advogadosarquivos(res[1])
+            lista_retencoes = emLiquidacoes.db_list_retencoes(res[1])
+            emLiquidacoes.send_post(res[0], id_empenho, res[4], res[5], res[6], res[7], res[8], lista_advogadosarquivos, lista_retencoes)
+    else:
+        send_log_info("Não foram encontrados registros na tabela em_liquidacoes para enviar.")
+    send_log_info("Processamento dos dados da tabela em_liquidacoes finalizado.")
+
+def enviar_dados_liquidacoes():
+    send_log_info("Iniciando o processamento dos dados da tabela liquidacoes.")
+    listaLiquidacoes = liquidacoes.db_list()
+    if listaLiquidacoes:
+        for res in listaLiquidacoes:
+            id_empenho = None # TODO ver origem da informação
+            id_em_liquidacao = emLiquidacoes.get_id_cloud(res[4])
+            lista_retencoes = liquidacoes.db_list_retencoes(res[1])
+            lista_advogadosarquivos = liquidacoes.db_list_advogadosarquivos(res[1])
+            lista_vencimentos = liquidacoes.db_list_vencimentos(res[1])
+            lista_entes_consorciados = liquidacoes.db_list_entes_consorciados(res[1])
+            liquidacoes.send_post(res[0], id_empenho, id_em_liquidacao, res[5], res[6], res[7], res[8], res[9], res[10], lista_retencoes, lista_advogadosarquivos, lista_vencimentos, lista_entes_consorciados)
+    else:
+        send_log_info("Não foram encontrados registros na tabela liquidacoes para enviar.")
+    send_log_info("Processamento dos dados da tabela liquidacoes finalizado.")
+
+def enviar_dados_itens_equivalencias():
+    send_log_info("Iniciando o processamento dos dados da tabela itens_equivalencias.")
+    listaItensEquivalencias = itensEquivalencias.db_list()
+    if listaItensEquivalencias:
+        for res in listaItensEquivalencias:
+            id_configuracao_plano_contas = configuracoesPlanosContas.get_id_cloud(res[3])
+            lista_campos = itensEquivalencias.db_list_campos(res[1])
+            itensEquivalencias.send_post(res[0], id_configuracao_plano_contas, res[4], res[5], lista_campos)
+    else:
+        send_log_info("Não foram encontrados registros na tabela itens_equivalencias para enviar.")
+    send_log_info("Processamento dos dados da tabela itens_equivalencias finalizado.")
+
+def enviar_dados_equivalencias():
+    send_log_info("Iniciando o processamento dos dados da tabela equivalencias.")
+    listaEquivalencias = equivalencias.db_list()
+    if listaEquivalencias:
+        for res in listaEquivalencias:
+            id_configuracao_plano_contas = configuracoesPlanosContas.get_id_cloud(res[3])
+            id_configuracao_equivalencia = configuracoesEquivalencias.get_id_cloud(res[4])
+            lista_equivalencias = equivalencias.db_list_itens_equivalencias(res[1])
+            equivalencias.send_post(res[0], id_configuracao_plano_contas, id_configuracao_equivalencia, res[5], res[6], lista_equivalencias)
+    else:
+        send_log_info("Não foram encontrados registros na tabela equivalencias para enviar.")
+    send_log_info("Processamento dos dados da tabela equivalencias finalizado.")
+
+def enviar_dados_anulacoes_empenhos():
+    send_log_info("Iniciando o processamento dos dados da tabela anulacoes_empenhos.")
+    listaAnulacoesEmpenhos = anulacoesEmpenhos.db_list()
+    if listaAnulacoesEmpenhos:
+        for res in listaAnulacoesEmpenhos:
+            id_empenho = None # TODO
+            lista_entes_consorciados = anulacoesEmpenhos.db_list_entes_consorciado(res[1])
+            anulacoesEmpenhos.send_post(res[0], id_empenho, res[4], res[5], res[6], res[7], res[8], res[9], lista_entes_consorciados)
+    else:
+        send_log_info("Não foram encontrados registros na tabela anulacoes_empenhos para enviar.")
+    send_log_info("Processamento dos dados da tabela anulacoes_empenhos finalizado.")
+
+def enviar_dados_complementos_empenhos():
+    send_log_info("Iniciando o processamento dos dados da tabela complementos_empenhos.")
+    listaComplementosEmpenhos = complementosEmpenhos.db_list()
+    if listaComplementosEmpenhos:
+        for res in listaComplementosEmpenhos:
+            id_empenho = None # TODO
+            lista_vencimentos = complementosEmpenhos.db_list_vencimentos(res[1])
+            complementosEmpenhos.send_post(res[0], id_empenho, res[4], res[5], res[6], res[7], res[8], lista_vencimentos)
+    else:
+        send_log_info("Não foram encontrados registros na tabela complementos_empenhos para enviar.")
+    send_log_info("Processamento dos dados da tabela complementos_empenhos finalizado.")
+
+def enviar_dados_contas_correntes_saldos_iniciais_itens():
+    send_log_info("Iniciando o processamento dos dados da tabela contas_correntes_saldos_iniciais_itens.")
+    listaContasCorrentesSaldosIniciaisItens = contasCorrentesSaldosIniciaisItens.db_list()
+    if listaContasCorrentesSaldosIniciaisItens:
+        for res in listaContasCorrentesSaldosIniciaisItens:
+            id_conta_corrente = configuracoesContasCorrentes.get_id_cloud(res[3])
+            id_saldo_inicial_item = saldosIniciaisItens.get_id_cloud(res[4])
+            lista_componentes = contasCorrentesSaldosIniciaisItens.db_list_componentes(res[1])
+            contasCorrentesSaldosIniciaisItens.send_post(res[0], id_conta_corrente, id_saldo_inicial_item, res[5], res[6], res[7], lista_componentes)
+    else:
+        send_log_info("Não foram encontrados registros na tabela contas_correntes_saldos_iniciais_itens para enviar.")
+    send_log_info("Processamento dos dados da tabela contas_correntes_saldos_iniciais_itens finalizado.")
+
+def enviar_dados_inicia_escrituracao():
+    send_log_info("Iniciando o processamento dos dados da tabela inicia_escrituracao.")
+    listaIniciaEscrituracao = iniciaEscrituracao.db_list()
+    if listaIniciaEscrituracao:
+        for res in listaIniciaEscrituracao:
+            iniciaEscrituracao.send_post(res[0], res[3], res[4], res[5])
+    else:
+        send_log_info("Não foram encontrados registros na tabela inicia_escrituracao para enviar.")
+    send_log_info("Processamento dos dados da tabela inicia_escrituracao finalizado.")
+
+def enviar_dados_inicia_escrituracao_contabil():
+    send_log_info("Iniciando o processamento dos dados da tabela inicia_escrituracao_contabil.")
+    listaIniciaEscrituracaoContabil = iniciaEscrituracaoContabil.db_list()
+    if listaIniciaEscrituracaoContabil:
+        for res in listaIniciaEscrituracaoContabil:
+            iniciaEscrituracaoContabil.send_post(res[0], res[3], res[4], res[5])
+    else:
+        send_log_info("Não foram encontrados registros na tabela inicia_escrituracao_contabil para enviar.")
+    send_log_info("Processamento dos dados da tabela inicia_escrituracao_contabil finalizado.")
+
+def enviar_dados_anulacoes_despesas_extras():
+    send_log_info("Iniciando o processamento dos dados da tabela anulacoes_despesas_extras.")
+    listaAnulacoesDespesasExtras = anulacoesDespesasExtras.db_list()
+    if listaAnulacoesDespesasExtras:
+        for res in listaAnulacoesDespesasExtras:
+            id_despesa_extra = despesasExtras.get_id_cloud(res[3])
+            lista_classificacoes = anulacoesDespesasExtras.db_list_classificacoes(res[1])
+            lista_advogadosarquivos = anulacoesDespesasExtras.db_list_advogadosarquivos(res[1])
+            lista_retencoes = anulacoesDespesasExtras.db_list_retencoes(res[1])
+            lista_baixa_recursos = anulacoesDespesasExtras.db_list_baixa_recursos(res[1])
+            anulacoesDespesasExtras.send_post(res[0], id_despesa_extra, res[4], res[5], res[6], res[7], res[8], lista_classificacoes, lista_advogadosarquivos, lista_retencoes, lista_baixa_recursos)
+    else:
+        send_log_info("Não foram encontrados registros na tabela anulacoes_despesas_extras para enviar.")
+    send_log_info("Processamento dos dados da tabela anulacoes_despesas_extras finalizado.")
+
+def enviar_dados_arrecadacoes_orcamentarias():
+    send_log_info("Iniciando o processamento dos dados da tabela arrecadacoes_orcamentarias.")
+    listaArrecadacoesOrcamentarias = arrecadacoesOrcamentarias.db_list()
+    if listaArrecadacoesOrcamentarias:
+        for res in listaArrecadacoesOrcamentarias:
+            id_transacao_financeira = transacoesFinanceiras.get_id_cloud(res[3])
+            id_conta_bancaria = contasBancariasEntidades.get_id_cloud(res[4])
+            id_tipo_aplicacao = None # TODO ver origem da informação
+            id_classificacao = None # TODO ver origem da informação
+            lista_receitas = arrecadacoesOrcamentarias.db_list_receitas(res[1])
+            arrecadacoesOrcamentarias.send_post(res[0], id_transacao_financeira, id_conta_bancaria, id_tipo_aplicacao, id_classificacao, res[7], res[8], res[9], res[10], res[11], res[12], res[13], res[14], lista_receitas)
+    else:
+        send_log_info("Não foram encontrados registros na tabela arrecadacoes_orcamentarias para enviar.")
+    send_log_info("Processamento dos dados da tabela arrecadacoes_orcamentarias finalizado.")
+
+def enviar_dados_descartes_origens_extras():
+    send_log_info("Iniciando o processamento dos dados da tabela descartes_origens_extras.")
+    listaDescartesOrigensExtras = descartesOrigensExtras.db_list()
+    if listaDescartesOrigensExtras:
+        for res in listaDescartesOrigensExtras:
+            id_origem = recursos.get_id_cloud(res[4])
+            descartesOrigensExtras.send_post(res[0], res[3], id_origem, res[5], res[6], res[7], res[8])
+    else:
+        send_log_info("Não foram encontrados registros na tabela descartes_origens_extras para enviar.")
+    send_log_info("Processamento dos dados da tabela descartes_origens_extras finalizado.")
+
+def enviar_dados_funcionarios_retencoes():
+    send_log_info("Iniciando o processamento dos dados da tabela funcionarios_retencoes.")
+    listaFuncionariosRetencoes = funcionariosRetencoes.db_list()
+    if listaFuncionariosRetencoes:
+        for res in listaFuncionariosRetencoes:
+            id_funcionario = funcionarios.get_id_cloud(res[3])
+            id_retencao_vinculo = retencoes.get_id_cloud(res[4])
+            funcionariosRetencoes.send_post(res[0], id_funcionario, id_retencao_vinculo, res[5], res[6])
+    else:
+        send_log_info("Não foram encontrados registros na tabela funcionarios_retencoes para enviar.")
+    send_log_info("Processamento dos dados da tabela funcionarios_retencoes finalizado.")
+
+def enviar_dados_funcionarios_empenhos():
+    send_log_info("Iniciando o processamento dos dados da tabela funcionarios_empenhos.")
+    listaFuncionariosEmpenhos = funcionariosEmpenhos.db_list()
+    if listaFuncionariosEmpenhos:
+        for res in listaFuncionariosEmpenhos:
+            id_funcionario = funcionarios.get_id_cloud(res[3])
+            id_empenho = None # TODO fazer empenho
+            funcionariosEmpenhos.send_post(res[0], id_funcionario, id_empenho, res[5], res[6])
+    else:
+        send_log_info("Não foram encontrados registros na tabela funcionarios_empenhos para enviar.")
+    send_log_info("Processamento dos dados da tabela funcionarios_empenhos finalizado.")
+
+def enviar_dados_anulacoes_arrecadacoes_orcamentarias():
+    send_log_info("Iniciando o processamento dos dados da tabela anulacoes_arrecadacoes_orcamentarias.")
+    listaAnulacoesArrecadacoesOrcamentarias = anulacoesArrecadacoesOrcamentarias.db_list()
+    if listaAnulacoesArrecadacoesOrcamentarias:
+        for res in listaAnulacoesArrecadacoesOrcamentarias:
+            id_arrecadacao = arrecadacoesOrcamentarias.get_id_cloud(res[3])
+            lista_receitas = anulacoesArrecadacoesOrcamentarias.db_list_receitas(res[1])
+            anulacoesArrecadacoesOrcamentarias.send_post(res[0], id_arrecadacao, res[4], res[5], res[6], res[7], res[8], lista_receitas)
+    else:
+        send_log_info("Não foram encontrados registros na tabela anulacoes_arrecadacoes_orcamentarias para enviar.")
+    send_log_info("Processamento dos dados da tabela anulacoes_arrecadacoes_orcamentarias finalizado.")
+
+def enviar_dados_evento_folha():
+    send_log_info("Iniciando o processamento dos dados da tabela evento_folha.")
+    listaEventoFolha = eventoFolha.db_list()
+    if listaEventoFolha:
+        for res in listaEventoFolha:
+            id_configuracao = configuracoesPlanosContas.get_id_cloud(res[3])
+            id_organizador = None # TODO organizador
+            eventoFolha.send_post(res[0], id_configuracao, id_organizador, res[5], res[6], res[7], res[8], res[9], res[10])
+    else:
+        send_log_info("Não foram encontrados registros na tabela evento_folha para enviar.")
+    send_log_info("Processamento dos dados da tabela evento_folha finalizado.")
+
+def enviar_dados_organizadores_folha():
+    send_log_info("Iniciando o processamento dos dados da tabela organizadores_folha.")
+    listaOrganizadoresFolha = organizadoresFolha.db_list()
+    if listaOrganizadoresFolha:
+        for res in listaOrganizadoresFolha:
+            organizadoresFolha.send_post(res[0], res[3], res[4])
+    else:
+        send_log_info("Não foram encontrados registros na tabela organizadores_folha para enviar.")
+    send_log_info("Processamento dos dados da tabela organizadores_folha finalizado.")
+
+def enviar_dados_arrecadacoes_extras():
+    send_log_info("Iniciando o processamento dos dados da tabela arrecadacoes_extras.")
+    listaArrecadacoesExtras = arrecadacoesExtras.db_list()
+    if listaArrecadacoesExtras:
+        for res in listaArrecadacoesExtras:
+            id_transacao_financeira = transacoesFinanceiras.get_id_cloud(res[3])
+            id_conta_bancaria = contasBancariasEntidades.get_id_cloud(res[4])
+            id_tipo_aplicacao = None # TODO ver origem da informação
+            lista_receitas = arrecadacoesExtras.db_list_receitas(res[1])
+            arrecadacoesExtras.send_post(res[0], id_transacao_financeira, id_conta_bancaria, id_tipo_aplicacao, res[6], res[7], res[8], res[9], res[10], res[11], res[12], res[13], lista_receitas)
+    else:
+        send_log_info("Não foram encontrados registros na tabela arrecadacoes_extras para enviar.")
+    send_log_info("Processamento dos dados da tabela arrecadacoes_extras finalizado.")
+
+def enviar_dados_anulacoes_arrecadacoes_extras():
+    send_log_info("Iniciando o processamento dos dados da tabela anulacoes_arrecadacoes_extras.")
+    listaAnulacoesArrecadacoesExtras = anulacoesArrecadacoesExtras.db_list()
+    if listaAnulacoesArrecadacoesExtras:
+        for res in listaAnulacoesArrecadacoesExtras:
+            id_arrecadacao = anulacoesArrecadacoesOrcamentarias.get_id_cloud(res[3])
+            lista_receitas = anulacoesArrecadacoesExtras.db_list_receitas(res[1])
+            anulacoesArrecadacoesExtras.send_post(res[0], id_arrecadacao, res[4], res[5], res[6], res[7], lista_receitas)
+    else:
+        send_log_info("Não foram encontrados registros na tabela anulacoes_arrecadacoes_extras para enviar.")
+    send_log_info("Processamento dos dados da tabela anulacoes_arrecadacoes_extras finalizado.")
+
+def enviar_dados_subempenhos():
+    send_log_info("Iniciando o processamento dos dados da tabela subempenhos.")
+    listaSubempenhos = subempenhos.db_list()
+    if listaSubempenhos:
+        for res in listaSubempenhos:
+            id_empenho = None # TODO empenhos.get_id_cloud(res[3])
+            id_conta_bancaria_credor = None # TODO ver disponibilidade de serviço para a leitura
+            lista_vencimentos = subempenhos.db_list_vencimentos
+            subempenhos.send_post(res[0], id_empenho, id_conta_bancaria_credor, res[5], res[6], res[7], res[8], res[9], lista_vencimentos)
+    else:
+        send_log_info("Não foram encontrados registros na tabela subempenhos para enviar.")
+    send_log_info("Processamento dos dados da tabela subempenhos finalizado.")
+
+def enviar_dados_anulacoes_subempenhos():
+    send_log_info("Iniciando o processamento dos dados da tabela anulacoes_subempenhos.")
+    listaAnulacoesSubempenhos = anulacoesSubempenhos.db_list()
+    if listaAnulacoesSubempenhos:
+        for res in listaAnulacoesSubempenhos:
+            id_subempenho = subempenhos.get_id_cloud(res[3])
+            anulacoesSubempenhos.send_post(res[0], id_subempenho, res[4], res[5], res[6], res[7], res[8])
+    else:
+        send_log_info("Não foram encontrados registros na tabela anulacoes_subempenhos para enviar.")
+    send_log_info("Processamento dos dados da tabela anulacoes_subempenhos finalizado.")
+
+def enviar_dados_anulacoes_liquidacoes():
+    send_log_info("Iniciando o processamento dos dados da tabela anulacoes_liquidacoes.")
+    listaAnulacoesLiquidacoes = anulacoesLiquidacoes.db_list()
+    if listaAnulacoesLiquidacoes:
+        for res in listaAnulacoesLiquidacoes:
+            id_liquidacao = liquidacoes.get_id_cloud(res[3])
+            lista_vencimentos = anulacoesLiquidacoes.db_list_vencimentos(res[1])
+            lista_retencoes = anulacoesLiquidacoes.db_list_retencoes(res[1])
+            lista_advogadosarquivos = anulacoesLiquidacoes.db_list_advogadosarquivos(res[1])
+            lista_entes_consorciados = anulacoesLiquidacoes.db_list_entes_consorciados(res[1])
+            anulacoesLiquidacoes.send_post(res[0], id_liquidacao, res[4], res[5], res[6], res[7], res[8], res[9], lista_vencimentos, lista_retencoes, lista_advogadosarquivos, lista_entes_consorciados)
+    else:
+        send_log_info("Não foram encontrados registros na tabela anulacoes_liquidacoes para enviar.")
+    send_log_info("Processamento dos dados da tabela anulacoes_liquidacoes finalizado.")
+
+def enviar_dados_empenhos_adiantamentos():
+    send_log_info("Iniciando o processamento dos dados da tabela empenhos_adiantamentos.")
+    listaEmpenhosAdiantamentos = empenhosAdiantamentos.db_list()
+    if listaEmpenhosAdiantamentos:
+        for res in listaEmpenhosAdiantamentos:
+            id_despesa = None # Ver origem da informação
+            id_natureza = naturezasDespesas.get_id_cloud(res[4])
+            id_recurso = recursos.get_id_cloud(res[5])
+            id_credor = credores.get_id_cloud(res[6])
+            id_contrato_rateio = contratoRateio.get_id_cloud(res[7])
+            lista_vencimentos = empenhosAdiantamentos.db_list_vencimentos(res[1])
+            lista_entes_consorciados = empenhosAdiantamentos.db_list_entes_consorciados(res[1])
+            empenhosAdiantamentos.send_post(res[0], id_despesa, id_natureza, id_recurso, id_credor, id_contrato_rateio, res[8], res[9], res[10], res[11], res[12], res[13], res[14], res[15], lista_vencimentos, lista_entes_consorciados)
+    else:
+        send_log_info("Não foram encontrados registros na tabela empenhos_adiantamentos para enviar.")
+    send_log_info("Processamento dos dados da tabela empenhos_adiantamentos finalizado.")
+
+def enviar_dados_empenhos_contratos():
+    send_log_info("Iniciando o processamento dos dados da tabela empenhos_contratos.")
+    listaEmpenhosContratos = empenhosContratos.db_list()
+    if listaEmpenhosContratos:
+        for res in listaEmpenhosContratos:
+            id_despesa = None # Ver origem da informação
+            id_natureza = naturezasDespesas.get_id_cloud(res[4])
+            id_recurso = recursos.get_id_cloud(res[5])
+            id_credor = credores.get_id_cloud(res[6])
+            id_conta_bancaria_credor = None # Ver origem da informação
+            id_contrato_rateio = contratoRateio.get_id_cloud(res[8])
+            lista_vencimentos = empenhosContratos.db_list_vencimentos(res[1])
+            lista_entes_consorciados = empenhosContratos.db_list_entes_consorciados(res[1])
+            empenhosContratos.send_post(res[0], id_despesa, id_natureza, id_recurso, id_credor, id_conta_bancaria_credor, id_contrato_rateio, res[9], res[10], res[11], res[12], res[13], res[14], res[15], res[16], res[17], res[18], res[19], res[20], res[21], res[22], res[23], res[24], res[25], res[26], res[27], res[28], res[29], res[30], res[31], res[32], res[33], res[34], res[35], res[36], lista_vencimentos, lista_entes_consorciados)
+    else:
+        send_log_info("Não foram encontrados registros na tabela empenhos_contratos para enviar.")
+    send_log_info("Processamento dos dados da tabela empenhos_contratos finalizado.")
+
+def enviar_dados_empenhos_convenios():
+    send_log_info("Iniciando o processamento dos dados da tabela empenhos_convenios.")
+    listaEmpenhosConvenios = empenhosConvenios.db_list()
+    if listaEmpenhosConvenios:
+        for res in listaEmpenhosConvenios:
+            id_despesa = None # Ver origem da informação
+            id_natureza = naturezasDespesas.get_id_cloud(res[4])
+            id_recurso = recursos.get_id_cloud(res[5])
+            id_credor = credores.get_id_cloud(res[6])
+            id_conta_bancaria_credor = None # Ver origem da informação
+            id_contrato_rateio = contratoRateio.get_id_cloud(res[8])
+            lista_vencimentos = empenhosConvenios.db_list_vencimentos(res[1])
+            lista_entes_consorciados = empenhosConvenios.db_list_entes_consorciados(res[1])
+            empenhosConvenios.send_post(res[0], id_despesa, id_natureza, id_recurso, id_credor, id_conta_bancaria_credor, id_contrato_rateio, res[9], res[10], res[11], res[12], res[13], res[14], res[15], res[16], res[17], res[18], res[19], res[20], res[21], res[22], res[23], lista_vencimentos, lista_entes_consorciados)
+    else:
+        send_log_info("Não foram encontrados registros na tabela empenhos_convenios para enviar.")
+    send_log_info("Processamento dos dados da tabela empenhos_convenios finalizado.")
+
+def enviar_dados_empenhos_credores():
+    send_log_info("Iniciando o processamento dos dados da tabela empenhos_credores.")
+    listaEmpenhosConvenios = empenhosCredores.db_list()
+    if listaEmpenhosConvenios:
+        for res in listaEmpenhosConvenios:
+            id_credor = credores.get_id_cloud(res[3])
+            id_conta_bancaria_credor = None # Ver origem da informação
+            id_despesa = None # Ver origem da informação
+            id_natureza = naturezasDespesas.get_id_cloud(res[6])
+            id_recurso = recursos.get_id_cloud(res[7])
+            id_contrato_rateio = contratoRateio.get_id_cloud(res[8])
+            lista_marcadores = empenhosCredores.db_list_marcadores(res[1])
+            lista_vencimentos = empenhosCredores.db_list_vencimentos(res[1])
+            lista_entes_consorciados = empenhosCredores.db_list_entes_consorciados(res[1])
+            empenhosCredores.send_post(res[0], id_credor, id_conta_bancaria_credor, id_despesa, id_natureza, id_recurso, id_contrato_rateio, res[9], res[10], res[11], res[12], res[13], res[14], res[15], res[16], lista_marcadores, lista_vencimentos, lista_entes_consorciados)
+    else:
+        send_log_info("Não foram encontrados registros na tabela empenhos_credores para enviar.")
+    send_log_info("Processamento dos dados da tabela empenhos_credores finalizado.")
+
+def enviar_dados_empenhos_diarias():
+    send_log_info("Iniciando o processamento dos dados da tabela empenhos_diarias.")
+    listaEmpenhosDiarias = empenhosDiarias.db_list()
+    if listaEmpenhosDiarias:
+        for res in listaEmpenhosDiarias:
+            id_diaria = diarias.get_id_cloud(res[3])
+            id_despesa = None # Ver origem da informação
+            id_natureza = naturezasDespesas.get_id_cloud(res[5])
+            id_recurso = recursos.get_id_cloud(res[6])
+            id_contrato_rateio = contratoRateio.get_id_cloud(res[7])
+            lista_vencimentos = empenhosDiarias.get_id_cloud(res[1])
+            lista_entes_consorciados = empenhosDiarias.get_id_cloud(res[1])
+            empenhosDiarias.send_post(res[0], id_diaria, id_despesa, id_natureza, id_recurso, id_contrato_rateio, res[8], res[9], res[10], res[11], res[12], res[13], res[14], res[15], lista_vencimentos, lista_entes_consorciados)
+    else:
+        send_log_info("Não foram encontrados registros na tabela empenhos_diarias para enviar.")
+    send_log_info("Processamento dos dados da tabela empenhos_diarias finalizado.")
+
+def enviar_dados_empenhos_dividas():
+    send_log_info("Iniciando o processamento dos dados da tabela empenhos_dividas.")
+    listaEmpenhosDividas = empenhosDividas.db_list()
+    if listaEmpenhosDividas:
+        for res in listaEmpenhosDividas:
+            id_divida = dividas.get_id_cloud(res[3])
+            id_despesa = None # Ver origem da informação
+            id_natureza = naturezasDespesas.get_id_cloud(res[5])
+            id_recurso = recursos.get_id_cloud(res[6])
+            id_contrato_rateio = contratoRateio.get_id_cloud(res[7])
+            lista_vencimentos = empenhosDividas.db_list_vencimentos(res[1])
+            lista_entes_consorciados = empenhosDividas.db_list_entes_consorciados(res[1])
+            empenhosDividas.send_post(res[0], id_divida, id_despesa, id_natureza, id_recurso, id_contrato_rateio, res[8], res[9], res[10], res[11], res[12], res[13], res[14], res[15], res[16], lista_vencimentos, lista_entes_consorciados)
+    else:
+        send_log_info("Não foram encontrados registros na tabela empenhos_dividas para enviar.")
+    send_log_info("Processamento dos dados da tabela empenhos_dividas finalizado.")
+
+def enviar_dados_empenhos_folha():
+    send_log_info("Iniciando o processamento dos dados da tabela empenhos_folha.")
+    listaEmpenhosFolha = empenhosFolha.db_list()
+    if listaEmpenhosFolha:
+        for res in listaEmpenhosFolha:
+            id_despesa = None # Ver origem da informação
+            id_natureza = naturezasDespesas.get_id_cloud(res[4])
+            id_recurso = recursos.get_id_cloud(res[5])
+            id_credor = credores.get_id_cloud(res[6])
+            id_contrato_rateio = contratoRateio.get_id_cloud(res[7])
+            lista_vencimentos = empenhosFolha.db_list_vencimentos(res[1])
+            lista_entes_consorciados = empenhosFolha.db_list_entes_consorciados(res[1])
+            empenhosFolha.send_post(res[0], id_despesa, id_natureza, id_recurso, id_credor, id_contrato_rateio, res[8], res[9], res[10], res[11], res[12], res[13], res[14], res[15], res[16], lista_vencimentos, lista_entes_consorciados)
+    else:
+        send_log_info("Não foram encontrados registros na tabela empenhos_folha para enviar.")
+    send_log_info("Processamento dos dados da tabela empenhos_folha finalizado.")
+
+def enviar_dados_empenhos_anistias():
+    send_log_info("Iniciando o processamento dos dados da tabela empenhos_anistias.")
+    listaEmpenhosanistias = empenhosanistias.db_list()
+    if listaEmpenhosanistias:
+        for res in listaEmpenhosanistias:
+            id_precatorio = anistias.get_id_cloud(res[3])
+            id_despesa = None # Ver origem da informação
+            id_natureza = naturezasDespesas.get_id_cloud(res[5])
+            id_recurso = recursos.get_id_cloud(res[6])
+            id_detalhamento_recurso = None # TODO ver origem da informação
+            id_contrato_rateio = contratoRateio.get_id_cloud(res[8])
+            lista_vencimentos = empenhosanistias.db_list_vencimentos(res[1])
+            lista_marcadores = empenhosanistias.db_list_marcadores(res[1])
+            lista_entes_consorciados = empenhosanistias.db_list_entes_consorciados(res[1])
+            empenhosanistias.send_post(res[0], id_precatorio, id_despesa, id_natureza, id_recurso, id_detalhamento_recurso, id_contrato_rateio, res[9], res[10], res[11], res[12], res[13], res[14], res[15], res[16], lista_vencimentos, lista_marcadores, lista_entes_consorciados)
+    else:
+        send_log_info("Não foram encontrados registros na tabela empenhos_anistias para enviar.")
+    send_log_info("Processamento dos dados da tabela empenhos_anistias finalizado.")
+
+def enviar_dados_empenhos_processos_administrativos():
+    send_log_info("Iniciando o processamento dos dados da tabela empenhos_processos_administrativos.")
+    listaEmpenhosProcessosAdministrativos = empenhosProcessosAdministrativos.db_list()
+    if listaEmpenhosProcessosAdministrativos:
+        for res in listaEmpenhosProcessosAdministrativos:
+            id_despesa = None # Ver origem da informação
+            id_natureza = naturezasDespesas.get_id_cloud(res[4])
+            id_recurso = recursos.get_id_cloud(res[5])
+            id_credor = credores.get_id_cloud(res[6])
+            id_conta_bancaria_credor = None # Ver origem da informação
+            id_contrato_rateio = contratoRateio.get_id_cloud(res[8])
+            lista_vencimentos = empenhosProcessosAdministrativos.db_list_vencimentos(res[1])
+            lista_entes_consorciados = empenhosProcessosAdministrativos.db_list_entes_consorciados(res[1])
+            empenhosProcessosAdministrativos.send_post(res[0], id_despesa, id_natureza, id_recurso, id_credor, id_conta_bancaria_credor, id_contrato_rateio, res[9], res[10], res[11], res[12], res[13], res[14], res[15], res[16], res[17], res[18], res[19], res[20], res[21], res[22], res[23], res[24], res[25], res[26], res[27], res[28], res[29], res[30], res[31], res[32], res[33], res[34], res[35], res[36], res[37], res[38], res[39], res[40], res[41], res[42], res[43], res[44], res[45], lista_vencimentos, lista_entes_consorciados)
+    else:
+        send_log_info("Não foram encontrados registros na tabela empenhos_processos_administrativos para enviar.")
+    send_log_info("Processamento dos dados da tabela empenhos_processos_administrativos finalizado.")
+	def enviar_dados_atos():
+    send_log_info("Iniciando o processamento dos dados da tabela atos.")
+    listaAtos = atos.db_list()
+    if listaAtos:
+        for res in listaAtos:
+            id_tipo_ato = tiposAtos.get_id_cloud(res[3])
+            id_natureza_texto_juridico = naturezasTextosJuridicosAtos.get_id_cloud(res[4])
+            lista_fontes_divulgacao = atos.db_list_fontes_divulgacoes(res[1])
+            lista_atos_alterados = atos.db_list_atos_alterados(res[1])
+            lista_atos_revogados = atos.db_list_atos_revogados(res[1])
+            atos.send_post(res[0], id_tipo_ato, id_natureza_texto_juridico, res[5], res[6], res[7], res[8], res[9], res[10], res[11], lista_fontes_divulgacao, lista_atos_alterados, lista_atos_revogados)
+    else:
+        send_log_info("Não foram encontrados registros na tabela atos para enviar.")
+    send_log_info("Processamento dos dados da tabela atos finalizado.")
+
+def enviar_dados_anistias():
+    send_log_info("Iniciando o processamento dos dados da tabela anistias.")
+    listaanistias = anistias.db_list()
+    if listaanistias:
+        for res in listaanistias:
+            lista_parcelas = anistias.db_list_parcelas(res[1])
+            anistias.send_post(res[0], id_tipo_precatorio, id_credor, id_ato, res[6], res[7], res[8], res[9], res[10], res[11], lista_parcelas)
+    else:
+        send_log_info("Não foram encontrados registros na tabela anistias para enviar.")
+    send_log_info("Processamento dos dados da tabela anistias finalizado.")
+	def enviar_dados_anulacoes_pagamentos():
+    send_log_info("Iniciando o processamento dos dados da tabela anulacoes_pagamentos.")
+    listaAnulacoesPagamentos = anulacoesPagamentos.db_list()
+    if listaAnulacoesPagamentos:
+        for res in listaAnulacoesPagamentos:
+            id_pagamento = pagamentos.get_id_cloud(res[3])
+            lista_retencoes = anulacoesPagamentos.db_list_retencoes(res[1])
+            lista_liquidacoes = anulacoesPagamentos.db_list_liquidacoes(res[1])
+            lista_baixa_recursos = anulacoesPagamentos.db_list_baixa_recursos(res[1])
+            lista_entes_consorciados = anulacoesPagamentos.db_list_entes_consorciados(res[1])
+            anulacoesPagamentos.send_post(res[0], id_pagamento, res[4], res[5], res[6], res[7], res[8], res[9], res[10], res[11], lista_retencoes, lista_liquidacoes, lista_baixa_recursos, lista_entes_consorciados)
+    else:
+        send_log_info("Não foram encontrados registros na tabela anulacoes_pagamentos para enviar.")
+    send_log_info("Processamento dos dados da tabela anulacoes_pagamentos finalizado.")
+
+def enviar_dados_parametros_orcamentarios_natureza_tce():
+    send_log_info("Iniciando o processamento dos dados da tabela parametros_orcamentarios_natureza_tce.")
+    listaParametrosOrcamentariosNaturezaTce = parametrosOrcamentariosNaturezaTce.db_list()
+    if listaParametrosOrcamentariosNaturezaTce:
+        for res in listaParametrosOrcamentariosNaturezaTce:
+            id_gerado = parametrosOrcamentarios.get_id_cloud(res[3])
+            parametrosOrcamentariosNaturezaTce.send_post(res[0], id_gerado, res[4])
+    else:
+        send_log_info("Não foram encontrados registros na tabela parametros_orcamentarios_natureza_tce para enviar.")
+    send_log_info("Processamento dos dados da tabela parametros_orcamentarios_natureza_tce finalizado.")
+
+def enviar_dados_despesas_movimentacoes():
+    send_log_info("Iniciando o processamento dos dados da tabela despesas_movimentacoes.")
+    listaDespesasMovimentacoes = despesasMovimentacoes.db_list()
+    if listaDespesasMovimentacoes:
+        for res in listaDespesasMovimentacoes:
+            despesasMovimentacoes.send_post(res[0], res[3], res[4])
+    else:
+        send_log_info("Não foram encontrados registros na tabela despesas_movimentacoes para enviar.")
+    send_log_info("Processamento dos dados da tabela despesas_movimentacoes finalizado.")
+
+def enviar_dados_eventos_documentos():
+    send_log_info("Iniciando o processamento dos dados da tabela eventos_documentos.")
+    listaEventosDocumentos = eventosDocumentos.db_list()
+    if listaEventosDocumentos:
+        for res in listaEventosDocumentos:
+            id_configuracao = configuracoesPlanosContas.get_id_cloud(res[4])
+            id_documento = None # TODO ver origem da informação
+            lista_contas = eventosDocumentos.db_list_contas(res[1])
+            eventosDocumentos.send_post(res[0], res[3], id_configuracao, id_documento, res[6], res[7], res[8], lista_contas)
+    else:
+        send_log_info("Não foram encontrados registros na tabela eventos_documentos para enviar.")
+    send_log_info("Processamento dos dados da tabela eventos_documentos finalizado.")
+
+def enviar_dados_devolucoes_receitas():
+    send_log_info("Iniciando o processamento dos dados da tabela devolucoes_receitas.")
+    listaDevolucoesReceitas = devolucoesReceitas.db_list()
+    if listaDevolucoesReceitas:
+        for res in listaDevolucoesReceitas:
+            id_deducao = deducoesReceitas.get_id_cloud(res[3])
+            id_credor = credores.get_id_cloud(res[4])
+            id_conta_bancaria_credor_devolucao_receita = None # TODO ver origem da informação
+            lista_receitas = devolucoesReceitas.db_list_receitas(res[1])
+            devolucoesReceitas.send_post(res[0], id_deducao, id_credor, id_conta_bancaria_credor_devolucao_receita, res[6], res[7], res[8], res[9], res[10], res[11], res[12], res[13], res[14], res[15], lista_receitas)
+    else:
+        send_log_info("Não foram encontrados registros na tabela devolucoes_receitas para enviar.")
+    send_log_info("Processamento dos dados da tabela devolucoes_receitas finalizado.")
