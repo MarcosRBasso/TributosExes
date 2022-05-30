@@ -9,13 +9,13 @@ class agrupamentos(Conexao):
         try:
             sql = """
                 INSERT INTO agrupamentos (
+                    cadastro,
                     desativado,
-                    id_responsavel,
                     id_cloud,
                     descricao
                 ) VALUES (
+                    %(cadastro)s,
                     %(desativado)s,
-                    %(id_responsavel)s,
                     %(id_cloud)s,
                     %(descricao)s
                 )
@@ -112,15 +112,14 @@ class agrupamentos(Conexao):
             "idIntegracao": f"agrupamentos{id}",
             "content": {}                                 
         }
-
-        if descricao:
-            objeto["content"]["descricao"] = f"{descricao}"
-        
         if cadastro:
             objeto["content"]["cadastro"] = f"{cadastro}"
-        
+
         if desativado:
-            objeto["content"]["desativado"] = f"{desativado}"        
+            objeto["content"]["desativado"] = f"{desativado}" 
+
+        if descricao:
+            objeto["content"]["descricao"] = f"{descricao}"       
      
         envio = api_post("agrupamentos", objeto)
 
