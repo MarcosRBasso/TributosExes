@@ -373,9 +373,9 @@ class MinhaGUI:
             functions.enviar_dados_loteamentos()
         if self.var_enviar_dados_condominios.get() == 1:
             functions.enviar_dados_condominios()                
-        if self.var_enviar_dados_agrupamentos() == 1:
+        if self.var_enviar_dados_agrupamentos.get() == 1:        
             functions.enviar_dados_agrupamentos()       
-        if self.var_enviar_dados_agrupamentosCamposAdicionais() == 1:
+        if self.var_enviar_dados_agrupamentosCamposAdicionais.get() == 1:
             functions.enviar_dados_agrupamentosCamposAdicionais()   
         if self.var_enviar_dados_alvaras.get() == 1:
             functions.enviar_dados_alvaras()
