@@ -5,18 +5,16 @@ class agrupamentos(Conexao):
     def __init__(self):
         Conexao.__init__(self)
 
-    def db_insert(self, idIntegracao, agrupamentos, cadastro, desativado, id_cloud, descricao):
+    def db_insert(self, idIntegracao, cadastro, desativado, id_cloud, descricao):
         try:
             sql = """
                 INSERT INTO agrupamentos (
-                    id_organograma,
-                    id_identificador_desktop_transparencia,
+                    desativado,
                     id_responsavel,
                     id_cloud,
                     descricao
                 ) VALUES (
-                    %(id_organograma)s,
-                    %(id_identificador_desktop_transparencia)s,
+                    %(desativado)s,
                     %(id_responsavel)s,
                     %(id_cloud)s,
                     %(descricao)s
@@ -24,7 +22,6 @@ class agrupamentos(Conexao):
             """
             data = dict (
                 idIntegracao = idIntegracao,
-                agrupamentos = agrupamentos,
                 cadastro = cadastro,
                 desativado = desativado,
                 id_cloud = id_cloud,
