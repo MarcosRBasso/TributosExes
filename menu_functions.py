@@ -146,7 +146,7 @@ def enviar_dados_agrupamentos():
     listaagrupamentos = agrupamentos.db_list()
     if listaagrupamentos:
         for res in listaagrupamentos:
-            agrupamentos.send_post(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7])
+            agrupamentos.send_post(res[0], res[1], res[2])
     else:
         send_log_info("Não foram encontrados registros na tabela agrupamentos para enviar.")
     send_log_info("Processamento dos dados da tabela agrupamentos finalizado.")
