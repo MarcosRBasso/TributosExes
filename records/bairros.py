@@ -51,34 +51,6 @@ class bairros(Conexao):
         except Exception as error:
             send_log_error(f"Erro ao executar a operação de exclusão do atividades econômicas. {error}")
 
-    def db_update(self, id, id_cloud, json, descricao):
-        try:
-            sql_s = f"SELECT * FROM bairros WHERE id = {id}"
-            if not self.query(sql_s):
-                send_log_warning(f"atividades Economicas {id} não encontrado para atualizar.")
-                return
-            sql = """
-                UPDATE 
-                    bairros 
-                SET 
-                    id_cloud = %(id_cloud)s,
-                    json_post = %(json)s,
-                    resposta_post = %(descricao)s
-                WHERE
-                    id = %(id)s
-                """
-            data = dict (
-                id = id,
-                id_cloud = id_cloud,
-                json = json,
-                descricao = descricao
-            )
-            self.execute(sql, data)
-            self.commit()
-            send_log_info(f"atividades Economicas {id} atualizado com sucesso.")
-        except Exception as error:
-            send_log_error(f"Erro ao executar a operação de atualização da atividades Economicas. {error}")
-
     def db_search(self, id):
         try:
             sql = f"SELECT * FROM bairros WHERE id = {id}"
