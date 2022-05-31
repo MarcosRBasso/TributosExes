@@ -87,15 +87,15 @@ def enviar_dados_logradourosBairros():
         send_log_info("Não foram encontrados registros na tabela logradourosBairros para enviar.")
     send_log_info("Processamento dos dados da tabela logradourosBairros finalizado.")
 
-#def enviar_dados_Bairros():
- #   send_log_info("Iniciando o processamento dos dados da tabela Bairros.")
-  #  listaBairros = Bairros.db_list()
-   # if listaBairros:
-    #    for res in listaBairros:
-     #       Bairros.send_post(res[0], res[1], res[2], res[3])
-    #else:
-    #    send_log_info("Não foram encontrados registros na tabela Bairros para enviar.")
-    #send_log_info("Processamento dos dados da tabela Bairros finalizado.")    
+def enviar_dados_Bairros():
+    send_log_info("Iniciando o processamento dos dados da tabela Bairros.")
+    listabairros = bairros.db_list()
+    if listabairros:
+        for res in listabairros:
+            bairros.send_post(res[0], res[2], res[3], res[4])
+    else:
+        send_log_info("Não foram encontrados registros na tabela Bairros para enviar.")
+    send_log_info("Processamento dos dados da tabela Bairros finalizado.")    
 
 def enviar_dados_advogados():
     send_log_info("Iniciando o processamento dos dados da tabela advogados.")
