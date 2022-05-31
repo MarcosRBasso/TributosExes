@@ -45,35 +45,7 @@ class agrupamentos(Conexao):
             send_log_info(f"Agrupamentos excluídos com sucesso.")
         except Exception as error:
             send_log_error(f"Erro ao executar a operação de exclusão do agrupamentos. {error}")
-
-    def db_update(self, id, id_cloud, json, mensagem):
-        try:
-            sql_s = f"SELECT * FROM agrupamentos WHERE id = {id}"
-            if not self.query(sql_s):
-                send_log_warning(f"Agrupamentos {id} não encontrado para atualizar.")
-                return
-            sql = """
-                UPDATE 
-                    agrupamentos 
-                SET 
-                    id_cloud = %(id_cloud)s,
-                    json_post = %(json)s,
-                    resposta_post = %(mensagem)s
-                WHERE
-                    id = %(id)s
-                """
-            data = dict (
-                id = id,
-                id_cloud = id_cloud,
-                json = json,
-                mensagem = mensagem
-            )
-            self.execute(sql, data)
-            self.commit()
-            send_log_info(f"Agrupamentos {id} atualizado com sucesso.")
-        except Exception as error:
-            send_log_error(f"Erro ao executar a operação de atualização do agrupamentos. {error}")
-
+   
     def db_search(self, id):
         try:
             sql = f"SELECT * FROM agrupamentos WHERE id = {id}"
