@@ -100,7 +100,7 @@ def enviar_dados_Bairros():
 def enviar_dados_advogados():
     send_log_info("Iniciando o processamento dos dados da tabela advogados.")
     listaadvogados = advogados.db_list()
-    if listaadvogados:
+    if listaadvogados: 
         for res in listaadvogados:
             advogados.send_post(res[0], res[3], res[4])
     else:
@@ -156,7 +156,7 @@ def enviar_dados_agrupamentos():
     listaagrupamentos = agrupamentos.db_list()
     if listaagrupamentos:
         for res in listaagrupamentos:
-            agrupamentos.send_post(res[0], res[1], res[2], res[3])
+            agrupamentos.send_post(res[0], res[2], res[3], res[4])
     else:
         send_log_info("Não foram encontrados registros na tabela agrupamentos para enviar.")
     send_log_info("Processamento dos dados da tabela agrupamentos finalizado.")
