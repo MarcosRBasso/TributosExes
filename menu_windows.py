@@ -18,8 +18,8 @@ class MinhaGUI:
         self.var_enviar_dados_agrupamentosCamposAdicionais = IntVar()
         self.cb_enviar_dados_agrupamentosCamposAdicionais = Checkbutton(self.janela_principal, text='Enviar agrupamentos Campos Adicionais', variable=self.var_enviar_dados_agrupamentosCamposAdicionais).place(x=20, y=80)
 
-        self.var_enviar_dados_logradourosBairros = IntVar()
-        self.cb_enviar_dados_logradourosBairros = Checkbutton(self.janela_principal, text='Enviar Bairros', variable=self.var_enviar_dados_logradourosBairros).place(x=20, y=100)
+        self.var_enviar_dados_Bairros = IntVar()
+        self.cb_enviar_dados_Bairros = Checkbutton(self.janela_principal, text='Enviar Bairros', variable=self.var_enviar_dados_Bairros).place(x=20, y=100)
 
         self.var_enviar_dados_advogados = IntVar()
         self.cb_enviar_dados_advogados = Checkbutton(self.janela_principal, text='Enviar advogados', variable=self.var_enviar_dados_advogados).place(x=20, y=120)
@@ -359,8 +359,8 @@ class MinhaGUI:
             functions.carregar_dados_estados()
         if self.var_carregar_dados_municipios.get() == 1:
             functions.carregar_dados_municipios()
-        if self.var_enviar_dados_logradourosBairros.get() == 1:
-            functions.enviar_dados_logradourosBairros()
+        if self.var_enviar_dados_Bairros.get() == 1:
+            functions.enviar_dados_Bairros()
         if self.var_enviar_dados_advogados.get() == 1:
             functions.enviar_dados_advogados()
         if self.var_enviar_dados_advogadosCbo.get() == 1:

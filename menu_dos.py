@@ -16,7 +16,7 @@ def montar_menu():
 [57] Enviar enviar_dados_condominiosInfComplemOp do exercício         [112] enviar_dados_dividasReceitas
 [58] Enviar enviar_dados_configEconomicosTabelasAuxiliaresHistorico   [113] enviar_dados_dividasResponsaveis
 [59] Enviar enviar_dados_configGeoprocessamento                       [114] enviar_dados_unidadesMedidas        
-[60] Enviar enviar_dados_configGeracaoGuias                                  
+[60] Enviar enviar_dados_configGeracaoGuias                           [158] Enviar Bairros           
 [61] Enviar enviar_dados_configHomologacaoTributos                           
 [10] Carregar agenciasBancarias  
 [2] enviar dados motivos                                              [62] Enviar enviar_dados_configImobiliarias                                 
@@ -24,7 +24,7 @@ def montar_menu():
 [4] Carregar estados                                                  [64] Enviar enviar_dados_configInscrImobiliarias                            
 [5] Carregar municípios                                               [65] Enviar enviar_dados_configParcCreditos                      
 [11] Enviar unidades de medida                                        [66] Enviar enviar_dados_configNotasAvulsas                                 
-[12] Enviar logradourosBairros                                        [67] Enviar enviar_dados_configParcCreditosTaxas                 
+[12] Enviar Bairros                                        [67] Enviar enviar_dados_configParcCreditosTaxas                 
 [13] Enviar tipos de comprovantes                                     [68] Enviar agrupamentos Campos Adicionais                                  
 [14] Enviar deduções de receitas                                      [69] Enviar acréscimos de enviar_dados_configParcelamentos                  
 [15] Enviar deduções receitas exercícios                              [70] Enviar enviar_dados_configTaxaExpediente                          
@@ -85,7 +85,7 @@ def chama_funcao_menu(escolha):
     elif (escolha == '11'):
         functions.enviar_dados_unidades_medida() # [11] Enviar unidades de medida
     elif (escolha == '12'):
-        functions.enviar_dados_logradourosBairros() # [12] Enviar logradourosBairros
+        functions.enviar_dados_Bairros() # [12] Enviar logradourosBairros
     elif (escolha == '13'):
         functions.enviar_dados_advogados() # [13] Enviar tipos de comprovantes
     elif (escolha == '14'):
@@ -290,12 +290,14 @@ def chama_funcao_menu(escolha):
         functions.enviar_dados_unidadesMedidas() # [157] enviar dados unidades Medidas  
     elif (escolha == '157'):     
         functions.enviar_dados_agrupamentosCamposAdicionais() # [157] Consultar  agrupamentos Campos Adicionais  
+    elif (escolha == '84'):
+        functions.enviar_dados_Bairros() # [158] Enviar Bairros    
     elif (escolha.upper() == 'T'):
         functions.carregar_dados_paises() # [3] Carregar países
         functions.carregar_dados_estados() # [4] Carregar estados
         functions.carregar_dados_municipios() # [5] Carregar municípios
         functions.enviar_dados_unidades_medida() # [11] Enviar unidades de medida
-        functions.enviar_dados_logradourosBairros() # [12] Enviar logradourosBairros
+        functions.enviar_dados_Bairros() # [12] Enviar logradourosBairros
         functions.enviar_dados_advogados() # [13] Enviar tipos de comprovantes
         functions.enviar_dados_advogadosCbo() # [14] Enviar deduções de receitas
         functions.enviar_dados_advogadosResponsaveis() # [15] Enviar deduções receitas exercícios
@@ -397,6 +399,7 @@ def chama_funcao_menu(escolha):
         functions.enviar_dados_dividasResponsaveis() # [113] enviar_dados_dividasResponsaveis
         functions.enviar_dados_unidadesMedidas() # [157] enviar dados unidades Medidas 
         functions.enviar_dados_motivos()#[2] enviar dados motivos
+        functions.enviar_dados_Bairros() # [158] Enviar Bairros    
     else:
         print("Opção inválida. Tente novamente.")
 
